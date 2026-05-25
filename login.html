@@ -23,12 +23,7 @@
         <div class="card-body">
           <h2 class="text-center fw-bold mb-4">Login</h2>
 
-          <form
-            id="form_login"
-            data-testId="login-form"
-            method="POST"
-            action="/login"
-          >
+          <form id="form_login" data-testId="login-form">
             <!-- Email -->
             <div class="mb-3">
               <label for="email" class="form-label fw-semibold"> Email </label>
@@ -102,6 +97,54 @@
         </div>
       </div>
     </div>
+    <script type="module">
+      import {
+        loginService,
+        getFailedLoginCount,
+      } from "./src/services/login.service.js";
+
+      const formLogin = document.getElementById("form_login");
+
+      const errorBox = document.getElementById("errorLoginFailed");
+
+      const statusBox = document.getElementById("statusBox");
+
+      const emailInput = document.getElementById("email");
+
+      const passwordInput = document.getElementById("password");
+
+      formLogin.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = emailInput.value.trim();
+
+        const password = passwordInput.value.trim();
+
+        const result = loginService(email, password);
+
+        if (result.success) {
+          errorBox.style.display = "none";
+
+          statusBox.style.display = "block";
+
+          statusBox.innerHTML = `
+          <strong>Success:</strong>
+          ${result.message}
+        `;
+        } else {
+          errorBox.style.display = "block";
+
+          statusBox.style.display = "none";
+
+          errorBox.innerHTML = `
+          <strong>Error:</strong>
+          ${result.message}
+          <br/>
+          Failed login:
+          ${getFailedLoginCount()}
+        `;
+        }
+      });
+    </script>
   </body>
-  <script src="src/services/login.js"></script>
 </html>
