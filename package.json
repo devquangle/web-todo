@@ -27,6 +27,7 @@
   },
   "scripts": {
     "test:unit": "vitest run tests/unit",
+    "test:e2e": "playwright test --ui",
     "test:watch": "vitest watch",
     "coverage": "vitest run --coverage",
     "start": "http-server -p 8080"
