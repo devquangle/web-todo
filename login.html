@@ -6,12 +6,10 @@
 
     <title>Login</title>
 
-    <!-- Bootstrap 5 -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
- 
   </head>
 
   <body class="bg-light">
@@ -25,7 +23,12 @@
         <div class="card-body">
           <h2 class="text-center fw-bold mb-4">Login</h2>
 
-          <form id="form_login" data-testId="login-form" method="POST" action="/login">
+          <form
+            id="form_login"
+            data-testId="login-form"
+            method="POST"
+            action="/login"
+          >
             <!-- Email -->
             <div class="mb-3">
               <label for="email" class="form-label fw-semibold"> Email </label>
@@ -36,6 +39,7 @@
                 class="form-control form-control-lg rounded-3"
                 placeholder="Enter your email"
               />
+              <span id="emailError" class="text-danger small"></span>
             </div>
 
             <!-- Password -->
@@ -50,6 +54,7 @@
                 class="form-control form-control-lg rounded-3"
                 placeholder="Enter your password"
               />
+              <span id="passwordError" class="text-danger small"></span>
             </div>
 
             <!-- Remember -->
@@ -76,11 +81,11 @@
               <!-- Error -->
               <div
                 class="alert alert-danger flex-fill rounded-3 mb-0"
-                id="errorBox"
+                id="errorLoginFailed"
                 style="display: none"
               >
                 <strong>Error:</strong>
-                Invalid email
+                Invalid email or password
               </div>
 
               <!-- Status -->
@@ -98,8 +103,5 @@
       </div>
     </div>
   </body>
-    <script src="src/main.js">
-
-   
-    </script>
+  <script src="src/services/login.js"></script>
 </html>
