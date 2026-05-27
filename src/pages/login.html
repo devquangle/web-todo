@@ -3,9 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Login</title>
-
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,21 +11,14 @@
   </head>
 
   <body class="bg-light">
-    <div
-      class="container min-vh-100 d-flex justify-content-center align-items-center"
-    >
-      <div
-        class="card border-0 shadow-lg rounded-4 p-4"
-        style="width: 100%; max-width: 420px"
-      >
+    <div class="container min-vh-100 d-flex justify-content-center align-items-center">
+      <div class="card border-0 shadow-lg rounded-4 p-4" style="width: 100%; max-width: 420px">
         <div class="card-body">
           <h2 class="text-center fw-bold mb-4">Login</h2>
 
-          <form id="form_login" data-testId="login-form">
-            <!-- Email -->
+          <form id="form-login" data-testId="login-form">
             <div class="mb-3">
               <label for="email" class="form-label fw-semibold"> Email </label>
-
               <input
                 type="email"
                 id="email"
@@ -37,12 +28,8 @@
               <span id="emailError" class="text-danger small"></span>
             </div>
 
-            <!-- Password -->
             <div class="mb-3">
-              <label for="password" class="form-label fw-semibold">
-                Password
-              </label>
-
+              <label for="password" class="form-label fw-semibold"> Password </label>
               <input
                 type="password"
                 id="password"
@@ -52,16 +39,11 @@
               <span id="passwordError" class="text-danger small"></span>
             </div>
 
-            <!-- Remember -->
             <div class="form-check mb-4">
               <input class="form-check-input" type="checkbox" id="remember" />
-
-              <label class="form-check-label" for="remember">
-                Remember me
-              </label>
+              <label class="form-check-label" for="remember"> Remember me </label>
             </div>
 
-            <!-- Button -->
             <button
               type="submit"
               class="btn btn-dark btn-lg w-100 rounded-3"
@@ -71,107 +53,74 @@
               Sign In
             </button>
 
-            <!-- Message Box -->
             <div class="d-flex gap-3 mt-4">
-              <!-- Error -->
               <div
-                class="alert alert-danger flex-fill rounded-3 mb-0"
-                id="errorLoginFailed"
-                style="display: none"
-              >
-                <strong>Error:</strong>
-                Invalid email or password
-              </div>
-
-              <!-- Status -->
-              <div
-                class="alert alert-success flex-fill rounded-3 mb-0"
+                class="alert flex-fill rounded-3 mb-0"
                 id="statusBox"
                 style="display: none"
-              >
-                <strong>Status:</strong>
-                Connected
-              </div>
+              ></div>
             </div>
           </form>
         </div>
       </div>
     </div>
+
     <script type="module">
-      import {
-        loginService,
-        getFailedLoginCount,
-      } from "./src/services/login.service.js";
+      import { LoginService } from "../services/login.service.js";
+      import { UserService } from "../services/user.service.js";
 
-      const formLogin = document.getElementById("form_login");
-
-      const errorBox = document.getElementById("errorLoginFailed");
-
+      const formLogin = document.getElementById("form-login");
       const statusBox = document.getElementById("statusBox");
-
       const emailInput = document.getElementById("email");
-
       const passwordInput = document.getElementById("password");
-
       const emailError = document.getElementById("emailError");
-
       const passwordError = document.getElementById("passwordError");
 
-      // clear realtime
-      emailInput.addEventListener("input", () => {
-        emailError.textContent = "";
-      });
+      const userService = new UserService();
+      const loginService = new LoginService(userService);
 
-      passwordInput.addEventListener("input", () => {
+      // Helper syntax to reset errors uniformly when typing
+      const clearErrors = () => {
+        emailError.textContent = "";
         passwordError.textContent = "";
-      });
+        statusBox.style.display = "none";
+        statusBox.classList.remove("alert-success", "alert-danger");
+      };
+
+      emailInput.addEventListener("input", clearErrors);
+      passwordInput.addEventListener("input", clearErrors);
 
       formLogin.addEventListener("submit", function (event) {
         event.preventDefault();
 
         const email = emailInput.value.trim();
-
         const password = passwordInput.value.trim();
 
-        const result = loginService(email, password);
+        // Pass payload as an object
+        const result = loginService.login({ email, password });
 
-        // clear old errors
+        // Clean slate on submit
         emailError.textContent = "";
         passwordError.textContent = "";
-
-        // success
-        if (result.success) {
-          errorBox.style.display = "none";
-
-          statusBox.style.display = "block";
-
-          statusBox.innerHTML = `
-          <strong>Success:</strong>
-          ${result.message}
-        `;
-
-          return;
-        }
-
-        // field errors
-        if (result.errors) {
-          emailError.textContent = result.errors.email || "";
-
-          passwordError.textContent = result.errors.password || "";
-        }
-
-        // show error box
-        errorBox.style.display = "block";
-
         statusBox.style.display = "none";
+        statusBox.classList.remove("alert-success", "alert-danger");
 
-        errorBox.innerHTML = `
-        <strong>Error:</strong>
-        ${result.message}
-        <br/>
-        Failed login:
-        ${getFailedLoginCount()}
-      `;
+        if (result.success) {
+          statusBox.classList.add("alert-success");
+          statusBox.innerHTML = `<strong>Success:</strong> ${result.message}`;
+          statusBox.style.display = "block";
+          return; 
+        }
+
+        // Handle failure
+        statusBox.classList.add("alert-danger");
+        statusBox.innerHTML = `<strong>Error:</strong> ${result.message}`;
+        statusBox.style.display = "block";
+
+        if (result.data) {
+          emailError.textContent = result.data.email || "";
+          passwordError.textContent = result.data.password || "";
+        }
       });
     </script>
   </body>
