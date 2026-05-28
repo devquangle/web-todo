@@ -12,6 +12,50 @@
         document.write('<base href="' + window.APP_ROOT + '">');
       })();
     </script>
+    <script>
+      // Log chi tiết khi CSS/JS (resource) load lỗi 404 trên GitHub Pages.
+      // Lưu ý: lỗi resource không đi qua window.onerror, phải bắt ở capture phase.
+      (function () {
+        function resolveUrl(maybeRelative) {
+          try {
+            return new URL(maybeRelative, document.baseURI).href;
+          } catch {
+            return String(maybeRelative);
+          }
+        }
+
+        window.addEventListener(
+          "error",
+          (event) => {
+            const t = event && event.target;
+            if (!t || t === window) return;
+
+            const tag = (t.tagName || "").toLowerCase();
+            const src = t.getAttribute && t.getAttribute("src");
+            const href = t.getAttribute && t.getAttribute("href");
+            const url = src || href;
+
+            console.groupCollapsed("[Resource load error]");
+            console.log("tag:", tag);
+            console.log("attribute:", src ? "src" : href ? "href" : "(none)");
+            console.log("raw:", url);
+            console.log("resolved:", url ? resolveUrl(url) : "(unknown)");
+            console.log("baseURI:", document.baseURI);
+            console.log("APP_ROOT:", window.APP_ROOT);
+            console.log("location.href:", window.location.href);
+            console.groupEnd();
+          },
+          true
+        );
+
+        // In ra base/app_root ngay từ đầu để dễ đối chiếu.
+        console.log("[Base debug]", {
+          baseURI: document.baseURI,
+          APP_ROOT: window.APP_ROOT,
+          href: window.location.href,
+        });
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
