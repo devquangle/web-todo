@@ -3,11 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
     <script>
-      // Định nghĩa đường dẫn gốc: Local là '/' , GitHub Pages là '/web-todo/'
-      window.APP_ROOT = window.location.hostname.includes("github.io")
-        ? "/web-todo/"
-        : "/";
+      (function () {
+        const isGitHubPages = window.location.hostname.endsWith("github.io");
+        if (isGitHubPages) {
+          const repo =
+            window.location.pathname.split("/").filter(Boolean)[0] || "";
+          window.APP_ROOT = repo ? `/${repo}/` : "/";
+        } else {
+          window.APP_ROOT = "/";
+        }
+      })();
     </script>
     <title>Đăng Ký - Fashion Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
