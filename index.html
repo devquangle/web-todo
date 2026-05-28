@@ -3,13 +3,18 @@
   <head>
     <script>
       // Định nghĩa đường dẫn gốc: Local là '/' , GitHub Pages là '/web-todo/'
+      // Đồng thời cập nhật <base> để mọi đường dẫn tương đối hoạt động đúng.
       window.APP_ROOT = window.location.hostname.includes("github.io")
         ? "/web-todo/"
         : "/";
+      document.addEventListener("DOMContentLoaded", () => {
+        const baseEl = document.querySelector("base");
+        if (baseEl) baseEl.setAttribute("href", window.APP_ROOT);
+      });
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/web-todo/">
+    <base href="/" />
     
     <title>Fashion Store - Quần Áo & Giày Dép</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -313,7 +318,7 @@
 
     <div id="footer-placeholder"></div>
 
-    <script src="/src/index.js"></script>
-    <script src="/src/main.js"></script>
+    <script src="src/index.js"></script>
+    <script src="src/main.js"></script>
   </body>
 </html>
