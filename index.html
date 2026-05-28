@@ -2,15 +2,14 @@
 <html lang="vi">
   <head>
     <script>
-      // Định nghĩa đường dẫn gốc: Local là '/' , GitHub Pages là '/web-todo/'
+      // Định nghĩa đường dẫn gốc theo "thư mục hiện tại" của URL.
+      // Cách này tránh lỗi bị lồng path kiểu '/web-todo/web-todo/' trên Pages.
       // PHẢI set <base> ngay lúc parse HTML (không đợi DOMContentLoaded),
       // nếu không CSS/JS sẽ request sai và bị 404.
       (function () {
-        const root = window.location.hostname.includes("github.io")
-          ? "/web-todo/"
-          : "/";
-        window.APP_ROOT = root;
-        document.write('<base href="' + root + '">');
+        const root = new URL(".", window.location.href).pathname;
+        window.APP_ROOT = root.endsWith("/") ? root : root + "/";
+        document.write('<base href="' + window.APP_ROOT + '">');
       })();
     </script>
     <meta charset="UTF-8" />
