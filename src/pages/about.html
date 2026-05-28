@@ -2,14 +2,20 @@
 <html lang="vi">
   <head>
     <script>
-      window.APP_ROOT = window.location.hostname.includes("github.io")
-        ? "/web-todo/"
-        : "/";
+      (function () {
+        const isGitHubPages = window.location.hostname.endsWith("github.io");
+        if (isGitHubPages) {
+          const repo = window.location.pathname.split("/").filter(Boolean)[0] || "";
+          window.APP_ROOT = repo ? `/${repo}/` : "/";
+        } else {
+          window.APP_ROOT = "/";
+        }
+      })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Giới Thiệu - Fashion Shop</title>
-    <base href="/web-todo/" />
+    <base href="/" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
