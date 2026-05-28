@@ -24,10 +24,10 @@ describe("LoginService - Login", () => {
       const result = loginService.login(loginRequest);
 
       expect(result.success).toBe(false);
-      expect(result.message).toBe("Validation failed");
+      expect(result.message).toBe("Validation failed.");
       expect(result.data).toEqual({
-        email: "Email is required",
-        password: "Password is required",
+        email: "Email is required.",
+        password: "Password is required.",
       });
     });
 
@@ -41,9 +41,9 @@ describe("LoginService - Login", () => {
       const result = loginService.login(loginRequest);
 
       expect(result.success).toBe(false);
-      expect(result.message).toBe("Validation failed");
+      expect(result.message).toBe("Validation failed.");
       expect(result.data).toEqual({
-        email: "Invalid email format",
+        email: "Invalid email format.",
       });
     });
 
@@ -57,9 +57,9 @@ describe("LoginService - Login", () => {
       const result = loginService.login(loginRequest);
 
       expect(result.success).toBe(false);
-      expect(result.message).toBe("Validation failed");
+      expect(result.message).toBe("Validation failed.");
       expect(result.data).toEqual({
-        password: "Password must be at least 6 characters long",
+        password: "Password must be at least 6 characters long.",
       });
     });
 

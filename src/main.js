@@ -3,8 +3,6 @@ async function loadComponent(id, file) {
     if (!element) return;
 
     try {
-        // BỎ DÒNG: const url = window.location.origin + file;
-        // Dùng trực tiếp 'file' như một đường dẫn tương đối
         const response = await fetch(file); 
         
         if (!response.ok) throw new Error(`Lỗi tải file: ${file}`);
@@ -15,7 +13,12 @@ async function loadComponent(id, file) {
     }
 }
 
-// Gọi hàm với đường dẫn tương đối tính từ file HTML hiện tại
-// Nếu bạn đang ở index.html (gốc), dùng:
-loadComponent('navbar-placeholder', '../components/nav-user.html');
-loadComponent('footer-placeholder', '../components/footer-user.html');
+// Xác định đường dẫn gốc tương đối dựa trên vị trí của file HTML hiện tại
+// Nếu trang hiện tại nằm trong thư mục con '/src/pages/', tiền tố sẽ là '../'
+// Nếu trang hiện tại nằm ở thư mục gốc (index.html), tiền tố sẽ là './src/'
+const isSubPage = window.location.pathname.includes('/src/pages/');
+const basePath = isSubPage ? '../' : './src/';
+
+// Gọi hàm tải động các thành phần giao diện dùng chung
+loadComponent('navbar-placeholder', basePath + 'components/nav-user.html');
+loadComponent('footer-placeholder', basePath + 'components/footer-user.html');
