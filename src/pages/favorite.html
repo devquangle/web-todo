@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sản Phẩm Yêu Thích - Fashion Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/user.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
+
+    <!-- Navbar Placeholder -->
+    <nav id="navbar-placeholder" class="bg-slate-900/95 text-white sticky top-0 z-50 backdrop-blur-md border-b border-slate-800 shadow-lg">
+      <!-- Sẽ được tải động bằng main.js -->
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Danh Sách Yêu Thích</h1>
+          <p class="text-xs text-slate-400 mt-1">Những mẫu sneakers bạn đang cân nhắc mua sắm.</p>
+        </div>
+        <span class="text-xs bg-red-50 text-red-500 font-bold border border-red-200 px-3 py-1 rounded-full uppercase" id="wishlist-count">
+          0 sản phẩm
+        </span>
+      </div>
+
+      <!-- Wishlist Grid -->
+      <div id="wishlist-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Danh sách yêu thích kết xuất động bằng Javascript -->
+      </div>
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="cart-toast" class="fixed bottom-6 right-6 bg-slate-900 text-white rounded-2xl px-5 py-4 shadow-2xl border border-slate-800 z-55 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-black">
+        <i class="ri-shopping-cart-2-line text-lg"></i>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold">Đã thêm vào giỏ</h4>
+        <p class="text-[10px] text-slate-400 mt-0.5" id="toast-msg">Sản phẩm đã có trong giỏ hàng của bạn.</p>
+      </div>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
+
+    <!-- Wishlist JavaScript -->
+    <script>
+      let favorites = [
+        {
+          id: 1,
+          name: "Nike Air Force 1",
+          image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+          price: 2500000,
+          description: "Classic sneaker with modern comfort."
+        },
+        {
+          id: 2,
+          name: "Adidas Ultraboost",
+          image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400",
+          price: 3200000,
+          description: "Responsive running shoes with stylish design."
+        }
+      ];
+
+      function formatPrice(price) {
+        return price.toLocaleString("vi-VN") + " đ";
+      }
+
+      function showToast(productName) {
+        const toast = document.getElementById("cart-toast");
+        const toastMsg = document.getElementById("toast-msg");
+        toastMsg.textContent = "Sản phẩm " + productName + " đã được chuyển vào giỏ hàng.";
+        toast.classList.remove("translate-y-24", "opacity-0");
+        
+        setTimeout(() => {
+          toast.classList.add("translate-y-24", "opacity-0");
+        }, 3000);
+      }
+
+      function removeFavorite(id) {
+        favorites = favorites.filter(item => item.id !== id);
+        renderWishlist();
+      }
+
+      function addToCartFromWishlist(id, name) {
+        showToast(name);
+        // Sau đó xóa khỏi wishlist
+        removeFavorite(id);
+      }
+
+      function renderWishlist() {
+        const grid = document.getElementById("wishlist-grid");
+        const countBadge = document.getElementById("wishlist-count");
+        
+        countBadge.textContent = favorites.length + " sản phẩm";
+
+        if (favorites.length === 0) {
+          grid.innerHTML = `
+            <div class="col-span-full text-center py-16 bg-white border border-slate-100 rounded-2xl">
+              <span class="text-5xl"><i class="ri-heart-3-line text-slate-300"></i></span>
+              <h3 class="text-sm font-bold text-slate-700 mt-4">Danh sách yêu thích trống</h3>
+              <p class="text-xs text-slate-400 mt-1 mb-6">Hãy dạo quanh cửa hàng và chọn những mẫu sneakers bạn thích.</p>
+              <a href="/src/pages/product.html" class="inline-block bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-3 px-6 rounded-xl shadow-md transition">
+                Khám phá sản phẩm
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = favorites
+          .map((item) => {
+            return `
+              <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition group duration-300 flex flex-col">
+                <div class="relative overflow-hidden bg-slate-100 aspect-[4/3] shrink-0">
+                  <img
+                    src="${item.image}"
+                    class="object-cover w-full h-full group-hover:scale-105 transition duration-500"
+                    alt="${item.name}"
+                  />
+                  <!-- Nút xóa nhanh khỏi wishlist -->
+                  <button onclick="removeFavorite(${item.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm shadow-md hover:bg-red-50 hover:text-red-500 flex items-center justify-center transition border border-slate-100 text-slate-400">
+                    <i class="ri-delete-bin-line text-sm"></i>
+                  </button>
+                </div>
+
+                <div class="p-4 flex flex-col flex-grow">
+                  <span class="text-[10px] text-amber-500 font-bold uppercase tracking-wider mb-1">Giày Sneakers</span>
+                  <h3 class="text-xs sm:text-sm font-bold text-slate-800 truncate">${item.name}</h3>
+                  <p class="text-[10px] text-slate-400 mt-0.5 leading-normal min-h-[30px] line-clamp-2">${item.description}</p>
+                  
+                  <span class="text-sm font-black text-red-500 mt-3 mb-4 block">${formatPrice(item.price)}</span>
+                  
+                  <button onclick="addToCartFromWishlist(${item.id}, '${item.name}')" class="w-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-1.5 shadow-md">
+                    <i class="ri-shopping-cart-2-line"></i> Thêm vào giỏ
+                  </button>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      // Initial Render
+      renderWishlist();
+    </script>
+  </body>
+</html>

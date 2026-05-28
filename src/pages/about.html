@@ -1,26 +1,225 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giới Thiệu - Fashion Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Kho hoc tester - gio thieu</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/user.css" />
   </head>
-  <body>
-    <div class="container mt-3">
-      <div class="card" style="width: 18rem">
-        <img src="..." class="card-img-top" alt="..." />
-        <div class="card-body">
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+  <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
+ 
+    <!-- Navbar Placeholder -->
+    <nav id="navbar-placeholder" class="bg-slate-900/95 text-white sticky top-0 z-50 backdrop-blur-md border-b border-slate-800 shadow-lg">
+      <!-- Sẽ được tải động bằng main.js -->
+    </nav>
+
+    <main class="flex-grow">
+      <!-- Hero Banner Section -->
+      <section class="relative bg-slate-900 h-[380px] flex items-center justify-center bg-cover bg-center text-center px-4"
+        style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920');"
+      >
+        <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px]"></div>
+        <div class="relative z-10 max-w-3xl text-white">
+          <span class="text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-widest bg-amber-400/10 px-4 py-1.5 rounded-full border border-amber-400/20">
+            Câu Chuyện Thương Hiệu
+          </span>
+          <h1 class="text-3xl sm:text-5xl font-black tracking-tight mt-4 mb-4 text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-amber-200">
+            FASHION SHOP - KIẾN TẠO PHONG CÁCH
+          </h1>
+          <p class="text-sm sm:text-base text-slate-300 mb-0 max-w-xl mx-auto leading-relaxed">
+            Hành trình từ một cửa hàng nhỏ trở thành biểu tượng thời trang năng động dành cho giới trẻ nhiệt huyết.
           </p>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <!-- Sứ mệnh & Tầm nhìn -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <div class="inline-flex p-3 bg-amber-400/10 text-amber-500 rounded-2xl border border-amber-400/20">
+              <i class="ri-lightbulb-flash-line text-2xl"></i>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Sứ Mệnh Của Chúng Tôi
+            </h2>
+            <p class="text-slate-600 leading-relaxed">
+              Fashion Shop không đơn thuần chỉ cung cấp quần áo và giày dép. Sứ mệnh của chúng tôi là truyền cảm hứng để mỗi bạn trẻ tự tin thể hiện cá tính riêng, khẳng định bản sắc cá nhân thông qua những bộ trang phục năng động, thời thượng và chất lượng cao nhất.
+            </p>
+            <p class="text-slate-600 leading-relaxed">
+              Chúng tôi luôn khắt khe trong việc lựa chọn chất liệu, trau chuốt từng đường kim mũi chỉ để mang tới những trải nghiệm mặc dễ chịu và tự tin nhất cho khách hàng.
+            </p>
+          </div>
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-amber-400 to-amber-500 rounded-3xl opacity-10 blur-xl"></div>
+            <img src="https://images.unsplash.com/photo-1479064555552-3ef4979f8908?w=800" 
+              class="relative rounded-3xl shadow-xl w-full h-[320px] object-cover border border-slate-100"
+              alt="Fashion design"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Giá trị cốt lõi -->
+      <section class="bg-slate-900 text-white py-16 border-t border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-amber-400 text-xs font-bold uppercase tracking-widest">
+              Core Values
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">
+              Giá Trị Cốt Lõi Định Hình Thương Hiệu
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Giá trị 1 -->
+            <div class="bg-slate-800/50 border border-slate-800 rounded-2xl p-6 hover:border-amber-400/40 hover:-translate-y-1 transition duration-300">
+              <div class="w-12 h-12 bg-amber-400 text-slate-950 rounded-xl flex items-center justify-center mb-6">
+                <i class="ri-shield-check-line text-2xl font-bold"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Chất Lượng Hàng Đầu</h3>
+              <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                Mỗi sản phẩm đều trải qua quy trình kiểm định chất lượng chặt chẽ để đảm bảo phom dáng chuẩn, vải bền màu và đế giày êm ái bền bỉ.
+              </p>
+            </div>
+
+            <!-- Giá trị 2 -->
+            <div class="bg-slate-800/50 border border-slate-800 rounded-2xl p-6 hover:border-amber-400/40 hover:-translate-y-1 transition duration-300">
+              <div class="w-12 h-12 bg-amber-400 text-slate-950 rounded-xl flex items-center justify-center mb-6">
+                <i class="ri-flashlight-line text-2xl"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Sáng Tạo Không Ngừng</h3>
+              <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                Đón đầu và cập nhật liên tục các xu hướng thời trang đường phố (streetwear) độc lạ và trẻ trung nhất trên thế giới.
+              </p>
+            </div>
+
+            <!-- Giá trị 3 -->
+            <div class="bg-slate-800/50 border border-slate-800 rounded-2xl p-6 hover:border-amber-400/40 hover:-translate-y-1 transition duration-300">
+              <div class="w-12 h-12 bg-amber-400 text-slate-950 rounded-xl flex items-center justify-center mb-6">
+                <i class="ri-heart-pulse-line text-2xl"></i>
+              </div>
+              <h3 class="text-lg font-bold text-white mb-2">Tận Tâm Khách Hàng</h3>
+              <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                Cam kết chăm sóc chu đáo trước, trong và sau mua hàng với chính sách bảo hành, đổi trả linh hoạt hỗ trợ tối đa người mua.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hành trình phát triển -->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            Hành Trình Kiến Tạo
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-2">
+            Những cột mốc quan trọng khẳng định sự trưởng thành của chúng tôi.
+          </p>
+        </div>
+
+        <div class="relative border-l border-slate-200 max-w-3xl mx-auto pl-6 sm:pl-8 space-y-12">
+          <!-- Cột mốc 1 -->
+          <div class="relative">
+            <span class="absolute -left-[35px] sm:-left-[43px] top-1 bg-amber-400 text-slate-950 w-8 h-8 rounded-full flex items-center justify-center font-bold border-4 border-white text-xs shadow-md">
+              1
+            </span>
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Năm 2023</span>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-1">Cửa hàng vật lý đầu tiên</h3>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Khai trương Showroom đầu tiên rộng 150m² tại trung tâm Hà Nội, đón nhận sự hưởng ứng mạnh mẽ của hơn 10,000 lượt khách hàng trong tháng đầu.
+            </p>
+          </div>
+
+          <!-- Cột mốc 2 -->
+          <div class="relative">
+            <span class="absolute -left-[35px] sm:-left-[43px] top-1 bg-amber-400 text-slate-950 w-8 h-8 rounded-full flex items-center justify-center font-bold border-4 border-white text-xs shadow-md">
+              2
+            </span>
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Năm 2024</span>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-1">Đột phá chuyển đổi số</h3>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Xây dựng nền tảng E-commerce chuyên nghiệp giúp phân phối sản phẩm nhanh chóng toàn quốc, rút ngắn thời gian giao nhận chỉ còn 1-3 ngày.
+            </p>
+          </div>
+
+          <!-- Cột mốc 3 -->
+          <div class="relative">
+            <span class="absolute -left-[35px] sm:-left-[43px] top-1 bg-amber-400 text-slate-950 w-8 h-8 rounded-full flex items-center justify-center font-bold border-4 border-white text-xs shadow-md">
+              3
+            </span>
+            <span class="text-xs font-bold text-amber-500 uppercase tracking-widest">Năm 2026</span>
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 mt-1">Dẫn đầu BST Thời Trang Chất Seed</h3>
+            <p class="text-slate-600 text-xs sm:text-sm mt-1 leading-relaxed">
+              Mở rộng chuỗi cung ứng độc quyền, giới thiệu bộ sưu tập "BST Thời Trang Đậm Chất Seed" hướng đến giới trẻ tự lập và bứt phá giới hạn bản thân.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Đội ngũ sáng lập -->
+      <section class="bg-slate-100 py-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-amber-500 text-xs font-bold uppercase tracking-widest">Founders</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+              Đội Ngũ Sáng Lập Đầy Đam Mê
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+            <!-- Thành viên 1 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm hover:shadow-lg transition duration-300 text-center flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300" 
+                class="w-24 h-24 rounded-full object-cover border-4 border-amber-400/20 mb-4"
+                alt="Founder"
+              />
+              <h3 class="font-bold text-slate-900 text-base sm:text-lg">Nguyễn Trần Khánh Vy</h3>
+              <span class="text-xs text-amber-500 font-bold uppercase tracking-wider mt-1">Co-Founder & CEO</span>
+              <p class="text-slate-500 text-xs sm:text-sm mt-3 leading-relaxed">
+                Người truyền cảm hứng và định hình định hướng nghệ thuật chính cho toàn bộ các bộ sưu tập thời trang.
+              </p>
+              <div class="flex gap-2.5 mt-4 text-slate-400 hover:text-slate-600">
+                <a href="#" class="hover:text-amber-500"><i class="ri-linkedin-box-fill text-lg"></i></a>
+                <a href="#" class="hover:text-amber-500"><i class="ri-twitter-fill text-lg"></i></a>
+              </div>
+            </div>
+
+            <!-- Thành viên 2 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm hover:shadow-lg transition duration-300 text-center flex flex-col items-center">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300" 
+                class="w-24 h-24 rounded-full object-cover border-4 border-amber-400/20 mb-4"
+                alt="Founder"
+              />
+              <h3 class="font-bold text-slate-900 text-base sm:text-lg">Trần Hoàng Nam</h3>
+              <span class="text-xs text-amber-500 font-bold uppercase tracking-wider mt-1">Co-Founder & CTO</span>
+              <p class="text-slate-500 text-xs sm:text-sm mt-3 leading-relaxed">
+                Chuyên gia kỹ thuật số điều hành toàn bộ hệ thống e-commerce giúp trải nghiệm mua sắm luôn siêu tốc.
+              </p>
+              <div class="flex gap-2.5 mt-4 text-slate-400 hover:text-slate-600">
+                <a href="#" class="hover:text-amber-500"><i class="ri-linkedin-box-fill text-lg"></i></a>
+                <a href="#" class="hover:text-amber-500"><i class="ri-github-fill text-lg"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
   </body>
 </html>

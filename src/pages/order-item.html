@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi Tiết Đơn Hàng - Fashion Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/user.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
+
+    <!-- Navbar Placeholder -->
+    <nav id="navbar-placeholder" class="bg-slate-900/95 text-white sticky top-0 z-50 backdrop-blur-md border-b border-slate-800 shadow-lg">
+      <!-- Sẽ được tải động bằng main.js -->
+    </nav>
+
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      
+      <!-- Top Action Bar -->
+      <div class="flex justify-between items-center mb-8">
+        <a href="/src/pages/order.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-amber-500 transition">
+          <i class="ri-arrow-left-line"></i> Quay lại đơn hàng
+        </a>
+        <span class="text-xs text-slate-400">Mã vận đơn: <span id="label-order-id" class="font-bold text-slate-900">#FS-90812</span></span>
+      </div>
+
+      <!-- Progression Timeline Step -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm mb-8">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-6">Trạng thái vận chuyển</h3>
+        
+        <div class="relative flex justify-between items-center max-w-2xl mx-auto">
+          <!-- Horizontal Timeline Bar background -->
+          <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-slate-100 -z-10"></div>
+          <div id="timeline-progress-bar" class="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-blue-500 -z-10 transition-all duration-700" style="width: 66%"></div>
+
+          <!-- Step 1: Đã đặt -->
+          <div class="text-center space-y-2">
+            <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto text-sm font-bold shadow-md">
+              <i class="ri-check-line"></i>
+            </div>
+            <span class="block text-[10px] font-bold text-slate-900">Đã đặt</span>
+          </div>
+
+          <!-- Step 2: Đóng gói -->
+          <div class="text-center space-y-2">
+            <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto text-sm font-bold shadow-md">
+              <i class="ri-check-line"></i>
+            </div>
+            <span class="block text-[10px] font-bold text-slate-900">Đóng gói</span>
+          </div>
+
+          <!-- Step 3: Đang giao -->
+          <div id="step-shipping" class="text-center space-y-2">
+            <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto text-sm font-bold shadow-md animate-pulse">
+              <i class="ri-truck-line"></i>
+            </div>
+            <span class="block text-[10px] font-bold text-blue-600">Đang giao</span>
+          </div>
+
+          <!-- Step 4: Đã giao -->
+          <div id="step-completed" class="text-center space-y-2">
+            <div class="w-8 h-8 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-sm font-bold border-2 border-slate-200">
+              <i class="ri-checkbox-circle-line"></i>
+            </div>
+            <span class="block text-[10px] font-bold text-slate-400">Đã giao</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Columns Grid Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Purchased Products Recap (Column Left 2/3) -->
+        <div class="md:col-span-2 space-y-6">
+          <div class="bg-white rounded-2xl border border-slate-200/60 shadow-sm overflow-hidden">
+            <div class="p-4 bg-slate-50 border-b border-slate-100">
+              <h3 class="text-xs font-bold text-slate-500 uppercase">Sản phẩm đã mua</h3>
+            </div>
+            <div id="order-items-container" class="p-4 sm:p-6 divide-y divide-slate-100">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Shipping and Billing Details (Column Right 1/3) -->
+        <div class="md:col-span-1 space-y-6">
+          
+          <!-- Shipping Address -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/60 shadow-sm space-y-4">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Thông tin giao nhận</h3>
+            
+            <div class="space-y-3 text-xs">
+              <div>
+                <span class="text-slate-400 block text-[10px]">Người nhận:</span>
+                <span class="font-bold text-slate-800">Nguyễn Trần Khánh Vy</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[10px]">Số điện thoại:</span>
+                <span class="font-bold text-slate-800">0987654321</span>
+              </div>
+              <div>
+                <span class="text-slate-400 block text-[10px]">Địa chỉ nhận hàng:</span>
+                <span class="font-bold text-slate-800 leading-relaxed block mt-0.5">123 Đường Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Billing Recap -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/60 shadow-sm space-y-4">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tóm tắt thanh toán</h3>
+            
+            <div class="space-y-2 text-xs text-slate-600">
+              <div class="flex justify-between">
+                <span>Tạm tính</span>
+                <span id="detail-subtotal" class="font-bold text-slate-900">0 đ</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Phí vận chuyển</span>
+                <span class="text-green-600 font-bold">Miễn phí</span>
+              </div>
+              <hr class="border-slate-100 my-2" />
+              <div class="flex justify-between text-sm">
+                <span class="font-bold text-slate-905">Tổng cộng</span>
+                <span id="detail-total" class="text-base font-black text-red-500">0 đ</span>
+              </div>
+              <div class="pt-2 text-[10px] text-slate-400">
+                Phương thức: <span id="detail-payment-method" class="font-bold text-slate-700">COD</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
+
+    <!-- Order Item Parsing Script -->
+    <script>
+      const mockOrdersData = {
+        "FS-90812": {
+          id: "FS-90812",
+          status: "shipping",
+          paymentMethod: "COD - Thanh toán khi nhận hàng",
+          total: 1850000,
+          items: [
+            {
+              name: "Giày Sneaker Thể Thao Nike Air Max Pro",
+              image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200",
+              price: 1850000,
+              quantity: 1,
+              details: "Size: 41 | Màu: Trắng"
+            }
+          ]
+        },
+        "FS-88712": {
+          id: "FS-88712",
+          status: "completed",
+          paymentMethod: "Thanh toán bằng thẻ Visa (Đã thanh toán)",
+          total: 450000,
+          items: [
+            {
+              name: "Áo Khoác Bomber Unisex Cực Chất",
+              image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200",
+              price: 450000,
+              quantity: 1,
+              details: "Size: L | Màu: Đen"
+            }
+          ]
+        },
+        "FS-85412": {
+          id: "FS-85412",
+          status: "completed",
+          paymentMethod: "Thanh toán bằng Ví điện tử MoMo (Đã thanh toán)",
+          total: 4120000,
+          items: [
+            {
+              name: "Giày Adidas Ultraboost 4.0",
+              image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=200",
+              price: 2100000,
+              quantity: 1,
+              details: "Size: 42 | Màu: Trắng"
+            },
+            {
+              name: "Puma RS-X Chunky Sneakers",
+              image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=200",
+              price: 2020000,
+              quantity: 1,
+              details: "Size: 40 | Màu: Xám"
+            }
+          ]
+        }
+      };
+
+      function formatPrice(price) {
+        return price.toLocaleString("vi-VN") + " đ";
+      }
+
+      function getUrlParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
+
+      function initOrderDetail() {
+        // Lấy ID đơn hàng từ URL, mặc định là FS-90812 nếu không có
+        let orderId = getUrlParam("id") || "FS-90812";
+        
+        // Đề phòng trường hợp nhập bừa ID
+        if (!mockOrdersData[orderId]) {
+          orderId = "FS-90812";
+        }
+
+        const data = mockOrdersData[orderId];
+
+        // 1. Cập nhật nhãn ID và Tổng tiền
+        document.getElementById("label-order-id").textContent = "#" + data.id;
+        document.getElementById("detail-subtotal").textContent = formatPrice(data.total);
+        document.getElementById("detail-total").textContent = formatPrice(data.total);
+        document.getElementById("detail-payment-method").textContent = data.paymentMethod;
+
+        // 2. Cập nhật Tiến trình vận chuyển
+        const timelineProgress = document.getElementById("timeline-progress-bar");
+        const stepShipping = document.getElementById("step-shipping");
+        const stepCompleted = document.getElementById("step-completed");
+
+        if (data.status === "shipping") {
+          timelineProgress.style.width = "66%";
+          
+          stepShipping.querySelector(".w-8").className = "w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto text-sm font-bold shadow-md animate-pulse";
+          stepShipping.querySelector("span").className = "block text-[10px] font-bold text-blue-600";
+          
+          stepCompleted.querySelector(".w-8").className = "w-8 h-8 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-sm font-bold border-2 border-slate-200";
+          stepCompleted.querySelector("span").className = "block text-[10px] font-bold text-slate-400";
+        } else if (data.status === "completed") {
+          timelineProgress.style.width = "100%";
+          
+          stepShipping.querySelector(".w-8").className = "w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto text-sm font-bold shadow-md";
+          stepShipping.querySelector("span").className = "block text-[10px] font-bold text-slate-900";
+          
+          stepCompleted.querySelector(".w-8").className = "w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto text-sm font-bold shadow-md";
+          stepCompleted.querySelector("span").className = "block text-[10px] font-bold text-blue-600";
+          stepCompleted.querySelector("i").className = "ri-check-line";
+        }
+
+        // 3. Hiển thị danh sách sản phẩm đã mua
+        const container = document.getElementById("order-items-container");
+        container.innerHTML = data.items
+          .map((item) => {
+            return `
+              <div class="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
+                <img src="${item.image}" class="w-16 h-16 object-cover rounded-xl bg-slate-50 border border-slate-100 shrink-0"/>
+                
+                <div class="flex-grow min-w-0">
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-800">${item.name}</h4>
+                  <p class="text-[10px] text-slate-400 mt-0.5">${item.details}</p>
+                  <p class="text-[10px] text-slate-400 mt-0.5">Số lượng: ${item.quantity}</p>
+                </div>
+
+                <div class="text-right shrink-0">
+                  <span class="text-xs sm:text-sm font-black text-slate-950">${formatPrice(item.price)}</span>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      // Initial Call
+      initOrderDetail();
+    </script>
+  </body>
+</html>

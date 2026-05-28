@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Ký - Fashion Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/user.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
+
+    <div class="container min-h-screen flex justify-center items-center px-4 py-12 mx-auto">
+      <div class="w-full max-w-md bg-white rounded-3xl border border-slate-200/60 shadow-xl overflow-hidden p-6 sm:p-8 space-y-6">
+        
+        <div class="text-center space-y-2">
+          <a href="/" class="text-2xl font-black tracking-wider text-amber-500 inline-block">👟 FASHION SHOP</a>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Tạo Tài Khoản Mới</h2>
+          <p class="text-xs text-slate-400">Đăng ký thành viên nhận ngay ưu đãi giảm 10% đơn đầu tiên.</p>
+        </div>
+
+        <form id="form-register" class="space-y-4">
+          <!-- Full Name -->
+          <div>
+            <label for="fullName" class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Họ và tên</label>
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Nhập họ tên của bạn"
+              class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+            />
+            <span id="nameError" class="text-[10px] text-red-500 mt-1 block font-medium"></span>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Địa chỉ Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="name@example.com"
+              class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+            />
+            <span id="emailError" class="text-[10px] text-red-500 mt-1 block font-medium"></span>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label for="password" class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Mật khẩu</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Tối thiểu 6 ký tự"
+              class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+            />
+            <span id="passwordError" class="text-[10px] text-red-500 mt-1 block font-medium"></span>
+          </div>
+
+          <!-- Confirm Password -->
+          <div>
+            <label for="confirmPassword" class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Xác nhận mật khẩu</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Nhập lại mật khẩu"
+              class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+            />
+            <span id="confirmError" class="text-[10px] text-red-500 mt-1 block font-medium"></span>
+          </div>
+
+          <!-- Terms Checkbox -->
+          <div class="flex items-start gap-2.5">
+            <input type="checkbox" id="terms" class="mt-0.5 accent-amber-500 rounded border-slate-200"/>
+            <label for="terms" class="text-[11px] text-slate-500 leading-normal">Tôi đồng ý với các Điều khoản dịch vụ và Chính sách bảo mật của Fashion Shop.</label>
+          </div>
+          <span id="termsError" class="text-[10px] text-red-500 block font-medium"></span>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-3.5 rounded-xl shadow-md hover:-translate-y-0.5 transition duration-300"
+          >
+            Đăng Ký Thành Viên
+          </button>
+
+          <!-- Status Alert Box -->
+          <div id="statusBox" class="hidden text-xs rounded-xl p-3 text-center font-bold"></div>
+        </form>
+
+        <div class="text-center text-xs text-slate-500 border-t border-slate-100 pt-4">
+          Đã có tài khoản? 
+          <a href="/src/pages/login.html" class="text-amber-500 hover:text-amber-600 font-bold transition">Đăng nhập ngay</a>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      const formRegister = document.getElementById("form-register");
+      const nameInput = document.getElementById("fullName");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const confirmInput = document.getElementById("confirmPassword");
+      const termsInput = document.getElementById("terms");
+      const statusBox = document.getElementById("statusBox");
+
+      const nameError = document.getElementById("nameError");
+      const emailError = document.getElementById("emailError");
+      const passwordError = document.getElementById("passwordError");
+      const confirmError = document.getElementById("confirmError");
+      const termsError = document.getElementById("termsError");
+
+      const clearErrors = () => {
+        nameError.textContent = "";
+        emailError.textContent = "";
+        passwordError.textContent = "";
+        confirmError.textContent = "";
+        termsError.textContent = "";
+        statusBox.className = "hidden";
+      };
+
+      formRegister.addEventListener("submit", function(e) {
+        e.preventDefault();
+        clearErrors();
+
+        let isValid = true;
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+        const confirm = confirmInput.value.trim();
+        const terms = termsInput.checked;
+
+        // Name Validation
+        if (!name) {
+          nameError.textContent = "Họ và tên không được để trống.";
+          isValid = false;
+        }
+
+        // Email Validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+          emailError.textContent = "Email không được để trống.";
+          isValid = false;
+        } else if (!emailRegex.test(email)) {
+          emailError.textContent = "Định dạng email không hợp lệ.";
+          isValid = false;
+        }
+
+        // Password Validation
+        if (!password) {
+          passwordError.textContent = "Mật khẩu không được để trống.";
+          isValid = false;
+        } else if (password.length < 6) {
+          passwordError.textContent = "Mật khẩu phải chứa ít nhất 6 ký tự.";
+          isValid = false;
+        }
+
+        // Confirm Password Validation
+        if (!confirm) {
+          confirmError.textContent = "Xác nhận mật khẩu không được để trống.";
+          isValid = false;
+        } else if (password !== confirm) {
+          confirmError.textContent = "Mật khẩu xác nhận không trùng khớp.";
+          isValid = false;
+        }
+
+        // Terms Validation
+        if (!terms) {
+          termsError.textContent = "Bạn phải đồng ý với điều khoản để tiếp tục.";
+          isValid = false;
+        }
+
+        if (isValid) {
+          statusBox.className = "text-xs rounded-xl p-3 text-center font-bold bg-green-50 text-green-600 border border-green-100 block animate-pulse";
+          statusBox.textContent = "Đăng ký thành công! Đang chuyển hướng sang Đăng nhập...";
+          
+          setTimeout(() => {
+            window.location.href = "/src/pages/login.html";
+          }, 2000);
+        } else {
+          statusBox.className = "text-xs rounded-xl p-3 text-center font-bold bg-red-50 text-red-500 border border-red-100 block";
+          statusBox.textContent = "Đăng ký thất bại. Vui lòng kiểm tra lại thông tin lỗi.";
+        }
+      });
+    </script>
+  </body>
+</html>

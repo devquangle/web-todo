@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đơn Hàng Của Tôi - Fashion Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/user.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
+
+    <!-- Navbar Placeholder -->
+    <nav id="navbar-placeholder" class="bg-slate-900/95 text-white sticky top-0 z-50 backdrop-blur-md border-b border-slate-800 shadow-lg">
+      <!-- Sẽ được tải động bằng main.js -->
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <div class="mb-8">
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Quản Lý Đơn Hàng</h1>
+        <p class="text-xs text-slate-400 mt-1">Theo dõi quá trình vận chuyển các sản phẩm bạn đã mua sắm.</p>
+      </div>
+
+      <!-- Filters Tabs -->
+      <div class="flex border-b border-slate-200 gap-4 sm:gap-8 mb-6 overflow-x-auto text-xs sm:text-sm whitespace-nowrap scrollbar-none">
+        <button onclick="filterOrders('all', this)" class="pb-3 border-b-2 border-amber-500 font-extrabold text-slate-900 transition">
+          Tất cả đơn (3)
+        </button>
+        <button onclick="filterOrders('shipping', this)" class="pb-3 border-b-2 border-transparent font-semibold text-slate-400 hover:text-slate-700 transition">
+          Đang vận chuyển (1)
+        </button>
+        <button onclick="filterOrders('completed', this)" class="pb-3 border-b-2 border-transparent font-semibold text-slate-400 hover:text-slate-700 transition">
+          Đã giao hàng (2)
+        </button>
+      </div>
+
+      <!-- Orders List Container -->
+      <div id="orders-container" class="space-y-6">
+        <!-- Đơn hàng kết xuất động bằng Javascript -->
+      </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
+
+    <!-- Orders Filter Script -->
+    <script>
+      const orders = [
+        {
+          id: "FS-90812",
+          date: "28/05/2026",
+          status: "shipping",
+          statusText: "Đang vận chuyển (Dự kiến nhận 30/05)",
+          paymentStatus: "COD - Chưa thanh toán",
+          total: 1850000,
+          items: [
+            {
+              name: "Giày Sneaker Thể Thao Nike Air Max Pro",
+              image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=100",
+              quantity: 1,
+              details: "Size: 41 | Màu: Trắng"
+            }
+          ]
+        },
+        {
+          id: "FS-88712",
+          date: "12/04/2026",
+          status: "completed",
+          statusText: "Đã giao hàng thành công",
+          paymentStatus: "Thanh toán qua Visa/Mastercard",
+          total: 450000,
+          items: [
+            {
+              name: "Áo Khoác Bomber Unisex Cực Chất",
+              image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=100",
+              quantity: 1,
+              details: "Size: L | Màu: Đen"
+            }
+          ]
+        },
+        {
+          id: "FS-85412",
+          date: "08/02/2026",
+          status: "completed",
+          statusText: "Đã giao hàng thành công",
+          paymentStatus: "Thanh toán qua Ví điện tử MoMo",
+          total: 4120000,
+          items: [
+            {
+              name: "Giày Adidas Ultraboost 4.0",
+              image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=100",
+              quantity: 1,
+              details: "Size: 42 | Màu: Trắng"
+            },
+            {
+              name: "Puma RS-X Chunky Sneakers",
+              image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=100",
+              quantity: 1,
+              details: "Size: 40 | Màu: Xám"
+            }
+          ]
+        }
+      ];
+
+      function formatPrice(price) {
+        return price.toLocaleString("vi-VN") + " đ";
+      }
+
+      function filterOrders(type, btn) {
+        // Cập nhật tab active
+        const tabs = btn.parentNode.querySelectorAll("button");
+        tabs.forEach(t => {
+          t.className = "pb-3 border-b-2 border-transparent font-semibold text-slate-400 hover:text-slate-700 transition";
+        });
+        btn.className = "pb-3 border-b-2 border-amber-500 font-extrabold text-slate-900 transition";
+
+        // Lọc dữ liệu
+        let filtered = orders;
+        if (type !== "all") {
+          filtered = orders.filter(o => o.status === type);
+        }
+
+        renderOrders(filtered);
+      }
+
+      function renderOrders(data = orders) {
+        const container = document.getElementById("orders-container");
+
+        if (data.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-16 bg-white border border-slate-100 rounded-2xl">
+              <span class="text-5xl"><i class="ri-file-list-3-line text-slate-300"></i></span>
+              <h3 class="text-sm font-bold text-slate-700 mt-4">Không có đơn hàng nào khớp</h3>
+              <p class="text-xs text-slate-400 mt-1">Đơn hàng tương ứng với trạng thái lọc này hiện chưa có.</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = data
+          .map((order) => {
+            const isShipping = order.status === "shipping";
+            const badgeClass = isShipping
+              ? "bg-blue-50 text-blue-600 border border-blue-100"
+              : "bg-green-50 text-green-600 border border-green-100";
+            
+            const animateDot = isShipping
+              ? '<span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse shrink-0"></span>'
+              : '<span class="w-2.5 h-2.5 rounded-full bg-green-500 shrink-0"></span>';
+
+            return `
+              <div class="bg-white rounded-2xl border border-slate-200/60 shadow-sm overflow-hidden hover:border-slate-300 transition">
+                <!-- Header Đơn hàng -->
+                <div class="p-4 bg-slate-50 border-b border-slate-100 flex flex-wrap justify-between items-center gap-2">
+                  <span class="text-xs font-bold text-slate-500 uppercase">Mã đơn: <span class="text-slate-900">#${order.id}</span></span>
+                  <span class="text-xs font-medium text-slate-400">Ngày đặt: ${order.date}</span>
+                </div>
+
+                <!-- Danh sách sản phẩm mua -->
+                <div class="p-4 sm:p-6 divide-y divide-slate-100">
+                  ${order.items
+                    .map((item) => `
+                      <div class="flex items-center gap-4 py-3 first:pt-0 last:pb-0">
+                        <img src="${item.image}" class="w-14 h-14 object-cover rounded-xl bg-slate-50 border border-slate-100 shrink-0"/>
+                        <div class="flex-grow min-w-0">
+                          <h4 class="text-xs sm:text-sm font-bold text-slate-800 truncate">${item.name}</h4>
+                          <p class="text-[10px] text-slate-400 mt-0.5">${item.details} | Số lượng: ${item.quantity}</p>
+                        </div>
+                      </div>
+                    `)
+                    .join("")}
+                </div>
+
+                <!-- Footer Đơn hàng (Tổng tiền & Trạng thái) -->
+                <div class="p-4 bg-slate-50/40 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                  <div class="flex items-center gap-2">
+                    ${animateDot}
+                    <span class="text-[11px] font-bold uppercase tracking-wider ${isShipping ? 'text-blue-600' : 'text-green-600'}">
+                      ${order.statusText}
+                    </span>
+                  </div>
+                  
+                  <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
+                    <div class="text-left sm:text-right text-xs">
+                      <span class="text-slate-400 block text-[10px]">Tổng thanh toán:</span>
+                      <span class="text-base font-black text-red-500">${formatPrice(order.total)}</span>
+                    </div>
+                    
+                    <a href="/src/pages/order-item.html?id=${order.id}" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 px-4 rounded-xl transition shadow-md hover:-translate-y-0.5">
+                      Xem chi tiết
+                    </a>
+                  </div>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      // Initial Render
+      renderOrders();
+    </script>
+  </body>
+</html>

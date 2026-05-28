@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ Hàng - Fashion Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/user.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
+
+    <!-- Navbar Placeholder -->
+    <nav id="navbar-placeholder" class="bg-slate-900/95 text-white sticky top-0 z-50 backdrop-blur-md border-b border-slate-800 shadow-lg">
+      <!-- Sẽ được tải động bằng main.js -->
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mb-8">Giỏ Hàng Của Bạn</h1>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Cart Items List (Column Left) -->
+        <div class="lg:col-span-2 space-y-4" id="cart-container">
+          <!-- Sẽ kết xuất động sản phẩm giỏ hàng tại đây -->
+        </div>
+
+        <!-- Order Summary Block (Column Right) -->
+        <div class="lg:col-span-1 space-y-6">
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm space-y-6">
+            <h3 class="text-base font-extrabold text-slate-900">Tóm tắt đơn hàng</h3>
+            
+            <div class="space-y-3.5 text-xs text-slate-600">
+              <div class="flex justify-between">
+                <span>Tạm tính</span>
+                <span id="summary-subtotal" class="font-bold text-slate-900">0 đ</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Mã giảm giá</span>
+                <span id="summary-discount" class="text-red-500 font-bold">-0 đ</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Thuế (VAT 8%)</span>
+                <span id="summary-tax" class="font-bold text-slate-900">0 đ</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Phí vận chuyển</span>
+                <span class="text-green-600 font-bold">Miễn phí</span>
+              </div>
+              <hr class="border-slate-100 my-4" />
+              <div class="flex justify-between text-sm">
+                <span class="font-bold text-slate-950">Tổng thanh toán</span>
+                <span id="summary-total" class="text-base font-black text-red-500">0 đ</span>
+              </div>
+            </div>
+
+            <!-- Promo Code input -->
+            <div class="space-y-2">
+              <label class="block text-[10px] font-bold text-slate-400 uppercase">Nhập mã giảm giá</label>
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  id="promo-input"
+                  placeholder="Ví dụ: MEMBER10"
+                  class="bg-slate-50 border border-slate-200 text-xs rounded-xl px-4 py-2.5 w-full focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                />
+                <button
+                  onclick="applyPromo()"
+                  class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shrink-0"
+                >
+                  Áp dụng
+                </button>
+              </div>
+              <span id="promo-msg" class="text-[10px] block font-bold"></span>
+            </div>
+
+            <!-- Checkout Button -->
+            <button
+              onclick="proceedCheckout()"
+              class="w-full bg-amber-400 hover:bg-amber-300 text-slate-900 text-xs font-bold py-3.5 rounded-xl shadow-md hover:-translate-y-0.5 transition duration-300 flex items-center justify-center gap-1.5"
+            >
+              <i class="ri-shield-user-line"></i> Tiến hành thanh toán
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
+
+    <!-- Dynamic Cart Script -->
+    <script>
+      // Mock Giỏ hàng lưu động
+      let cartItems = [
+        {
+          id: 1,
+          name: "Giày Sneaker Thể Thao Nike Air Max Pro",
+          image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200",
+          price: 1850000,
+          color: "White",
+          size: "41",
+          quantity: 1
+        },
+        {
+          id: 2,
+          name: "Áo Khoác Bomber Unisex Cực Chất",
+          image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200",
+          price: 450000,
+          color: "Black",
+          size: "L",
+          quantity: 2
+        }
+      ];
+
+      let discountRate = 0; // Tỷ lệ giảm giá hiện tại
+
+      function formatPrice(price) {
+        return price.toLocaleString("vi-VN") + " đ";
+      }
+
+      function updateCartQuantity(index, delta) {
+        const item = cartItems[index];
+        item.quantity += delta;
+        if (item.quantity < 1) {
+          cartItems.splice(index, 1);
+        }
+        renderCart();
+      }
+
+      function applyPromo() {
+        const promoInput = document.getElementById("promo-input");
+        const promoMsg = document.getElementById("promo-msg");
+        const code = promoInput.value.trim().toUpperCase();
+
+        if (code === "MEMBER10") {
+          discountRate = 0.1; // Giảm 10%
+          promoMsg.className = "text-[10px] block font-bold text-green-600";
+          promoMsg.textContent = "Áp dụng thành công! Giảm ngay 10% tổng đơn.";
+        } else if (code === "") {
+          promoMsg.className = "text-[10px] block font-bold text-red-500";
+          promoMsg.textContent = "Vui lòng nhập mã giảm giá.";
+        } else {
+          discountRate = 0;
+          promoMsg.className = "text-[10px] block font-bold text-red-500";
+          promoMsg.textContent = "Mã giảm giá không hợp lệ.";
+        }
+
+        renderCart();
+      }
+
+      function renderCart() {
+        const container = document.getElementById("cart-container");
+        
+        if (cartItems.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-16 bg-white border border-slate-100 rounded-2xl">
+              <span class="text-5xl"><i class="ri-shopping-cart-2-line text-slate-300"></i></span>
+              <h3 class="text-sm font-bold text-slate-700 mt-4">Giỏ hàng của bạn đang trống</h3>
+              <p class="text-xs text-slate-400 mt-1 mb-6">Hãy lấp đầy nó bằng những sản phẩm tuyệt vời của chúng tôi.</p>
+              <a href="/src/pages/product.html" class="inline-block bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-3 px-6 rounded-xl shadow-md transition">
+                Tiếp tục mua sắm
+              </a>
+            </div>
+          `;
+          
+          // Update Order summary to zeros
+          document.getElementById("summary-subtotal").textContent = "0 đ";
+          document.getElementById("summary-discount").textContent = "-0 đ";
+          document.getElementById("summary-tax").textContent = "0 đ";
+          document.getElementById("summary-total").textContent = "0 đ";
+          return;
+        }
+
+        container.innerHTML = cartItems
+          .map((item, index) => {
+            const subtotal = item.price * item.quantity;
+            return `
+              <div class="bg-white rounded-2xl p-4 border border-slate-200/60 shadow-sm flex items-center gap-4 hover:border-slate-300 transition">
+                <img src="${item.image}" class="w-16 h-16 object-cover rounded-xl border border-slate-100 bg-slate-50 shrink-0"/>
+                
+                <div class="flex-grow min-w-0">
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-800 truncate">${item.name}</h4>
+                  <p class="text-[10px] text-slate-400 mt-0.5">Màu: ${item.color} | Kích thước: ${item.size}</p>
+                  <p class="text-xs font-black text-slate-950 mt-1">${formatPrice(item.price)}</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+                  <!-- Trình tăng giảm số lượng -->
+                  <div class="flex items-center border border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+                    <button onclick="updateCartQuantity(${index}, -1)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-200 transition text-slate-500 font-bold">-</button>
+                    <span class="w-8 h-8 flex items-center justify-center text-xs font-bold text-slate-800">${item.quantity}</span>
+                    <button onclick="updateCartQuantity(${index}, 1)" class="w-8 h-8 flex items-center justify-center hover:bg-slate-200 transition text-slate-500 font-bold">+</button>
+                  </div>
+
+                  <!-- Tổng tiền của sản phẩm đó -->
+                  <div class="text-right w-24">
+                    <span class="text-xs font-black text-slate-950 block">${formatPrice(subtotal)}</span>
+                  </div>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+
+        // Calculate pricing
+        let subtotalTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        let discountVal = subtotalTotal * discountRate;
+        let taxVal = (subtotalTotal - discountVal) * 0.08;
+        let grandTotal = subtotalTotal - discountVal + taxVal;
+
+        document.getElementById("summary-subtotal").textContent = formatPrice(subtotalTotal);
+        document.getElementById("summary-discount").textContent = "-" + formatPrice(discountVal);
+        document.getElementById("summary-tax").textContent = formatPrice(taxVal);
+        document.getElementById("summary-total").textContent = formatPrice(grandTotal);
+      }
+
+      function proceedCheckout() {
+        if (cartItems.length === 0) return;
+        alert("Đặt đơn hàng thành công! Đang chuyển tiếp sang quản lý đơn hàng của bạn.");
+        window.location.href = "/src/pages/order.html";
+      }
+
+      // Initial Render
+      renderCart();
+    </script>
+  </body>
+</html>

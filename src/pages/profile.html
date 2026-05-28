@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ Sơ Cá Nhân - Fashion Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/user.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
+
+    <!-- Navbar Placeholder -->
+    <nav id="navbar-placeholder" class="bg-slate-900/95 text-white sticky top-0 z-50 backdrop-blur-md border-b border-slate-800 shadow-lg">
+      <!-- Sẽ được tải động bằng main.js -->
+    </nav>
+
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <div class="mb-8">
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Thiết Lập Tài Khoản</h1>
+        <p class="text-xs text-slate-400 mt-1">Quản lý và điều chỉnh thông tin cá nhân và cài đặt bảo mật của bạn.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Left Column: Avatar & Quick Info -->
+        <div class="md:col-span-1 space-y-6">
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm text-center flex flex-col items-center">
+            
+            <!-- Avatar Simulation upload -->
+            <div class="relative group cursor-pointer w-28 h-28 mb-4 rounded-full overflow-hidden border-4 border-amber-400/20 shadow-md">
+              <img
+                id="avatar-img"
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300"
+                class="w-full h-full object-cover group-hover:scale-105 group-hover:opacity-85 transition duration-300"
+                alt="Avatar"
+              />
+              <div onclick="simulateUpload()" class="absolute inset-0 bg-slate-950/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition text-white text-[10px] font-bold">
+                Đổi ảnh <i class="ri-camera-fill ml-0.5"></i>
+              </div>
+            </div>
+
+            <h3 class="font-extrabold text-slate-900 text-base sm:text-lg">Nguyễn Trần Khánh Vy</h3>
+            <span class="text-xs text-amber-500 font-bold uppercase tracking-wider mt-0.5">Hạng Vàng VIP</span>
+
+            <div class="w-full border-t border-slate-100 mt-6 pt-4 text-left space-y-3.5 text-xs text-slate-500">
+              <div class="flex justify-between items-center">
+                <span>Trạng thái</span>
+                <span class="inline-flex items-center gap-1 bg-green-50 text-green-600 px-2.5 py-0.5 rounded-full font-bold text-[9px] uppercase border border-green-100">
+                  Đã xác thực
+                </span>
+              </div>
+              <div class="flex justify-between">
+                <span>Tham gia</span>
+                <span class="font-bold text-slate-700">18/02/2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Settings Form -->
+        <div class="md:col-span-2 space-y-6">
+          <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm">
+            <h3 class="text-base font-extrabold text-slate-900 mb-6">Thông Tin Cá Nhân</h3>
+            
+            <form id="profile-form" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Họ và tên</label>
+                  <input
+                    type="text"
+                    id="profile-name"
+                    value="Nguyễn Trần Khánh Vy"
+                    class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                  />
+                  <span id="error-name" class="text-[10px] text-red-500 mt-1 block"></span>
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Số điện thoại</label>
+                  <input
+                    type="tel"
+                    id="profile-phone"
+                    value="0987654321"
+                    class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                  />
+                  <span id="error-phone" class="text-[10px] text-red-500 mt-1 block"></span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Địa chỉ Email</label>
+                <input
+                  type="email"
+                  value="alice@gmail.com"
+                  disabled
+                  class="w-full bg-slate-100 border border-slate-200 text-xs text-slate-400 rounded-xl px-4 py-3 cursor-not-allowed focus:outline-none"
+                />
+                <span class="text-[9px] text-slate-400 mt-1 block">Địa chỉ email chính dùng để đăng nhập và không thể sửa đổi.</span>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Địa chỉ nhận hàng mặc định</label>
+                <textarea
+                  id="profile-address"
+                  rows="2"
+                  class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                >123 Đường Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</textarea>
+                <span id="error-address" class="text-[10px] text-red-500 mt-1 block"></span>
+              </div>
+
+              <div class="border-t border-slate-100 my-6 pt-6">
+                <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4">Thay đổi mật khẩu</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Mật khẩu cũ</label>
+                    <input
+                      type="password"
+                      id="profile-old-pass"
+                      placeholder="Nhập mật khẩu cũ"
+                      class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Mật khẩu mới</label>
+                    <input
+                      type="password"
+                      id="profile-new-pass"
+                      placeholder="Tối thiểu 6 ký tự"
+                      class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                    />
+                  </div>
+                </div>
+                <span id="error-password" class="text-[10px] text-red-500 mt-1 block"></span>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button
+                  type="submit"
+                  class="bg-amber-400 hover:bg-amber-300 text-slate-900 text-xs font-bold py-3.5 px-6 rounded-xl shadow-md hover:-translate-y-0.5 transition duration-300"
+                >
+                  Lưu thiết lập
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="cart-toast" class="fixed bottom-6 right-6 bg-slate-900 text-white rounded-2xl px-5 py-4 shadow-2xl border border-slate-800 z-55 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-black">
+        <i class="ri-save-line text-lg"></i>
+      </div>
+      <div>
+        <h4 class="text-xs font-bold">Cập nhật thành công</h4>
+        <p class="text-[10px] text-slate-400 mt-0.5" id="toast-msg">Thông tin hồ sơ của bạn đã được thay đổi.</p>
+      </div>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
+
+    <!-- Profile simulation logic -->
+    <script>
+      const formProfile = document.getElementById("profile-form");
+      const nameInput = document.getElementById("profile-name");
+      const phoneInput = document.getElementById("profile-phone");
+      const addressInput = document.getElementById("profile-address");
+      const oldPassInput = document.getElementById("profile-old-pass");
+      const newPassInput = document.getElementById("profile-new-pass");
+
+      const errorName = document.getElementById("error-name");
+      const errorPhone = document.getElementById("error-phone");
+      const errorAddress = document.getElementById("error-address");
+      const errorPassword = document.getElementById("error-password");
+
+      // Danh sách ảnh đại diện thay thế mô phỏng ngẫu nhiên khi click
+      const mockAvatars = [
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300",
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300"
+      ];
+      let avatarIndex = 0;
+
+      function simulateUpload() {
+        avatarIndex = (avatarIndex + 1) % mockAvatars.length;
+        document.getElementById("avatar-img").src = mockAvatars[avatarIndex];
+        showToast("Đã cập nhật ảnh", "Ảnh đại diện mới đã được áp dụng.");
+      }
+
+      function showToast(title, msg) {
+        const toast = document.getElementById("cart-toast");
+        document.getElementById("toast-msg").textContent = msg;
+        toast.querySelector("h4").textContent = title;
+        toast.classList.remove("translate-y-24", "opacity-0");
+        
+        setTimeout(() => {
+          toast.classList.add("translate-y-24", "opacity-0");
+        }, 3000);
+      }
+
+      const clearErrors = () => {
+        errorName.textContent = "";
+        errorPhone.textContent = "";
+        errorAddress.textContent = "";
+        errorPassword.textContent = "";
+      };
+
+      formProfile.addEventListener("submit", function(e) {
+        e.preventDefault();
+        clearErrors();
+
+        let isValid = true;
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const address = addressInput.value.trim();
+        const oldPass = oldPassInput.value.trim();
+        const newPass = newPassInput.value.trim();
+
+        if (!name) {
+          errorName.textContent = "Họ và tên không được để trống.";
+          isValid = false;
+        }
+
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phone) {
+          errorPhone.textContent = "Số điện thoại không được để trống.";
+          isValid = false;
+        } else if (!phoneRegex.test(phone)) {
+          errorPhone.textContent = "Số điện thoại phải gồm 10 chữ số.";
+          isValid = false;
+        }
+
+        if (!address) {
+          errorAddress.textContent = "Địa chỉ nhận hàng không được để trống.";
+          isValid = false;
+        }
+
+        if (oldPass || newPass) {
+          if (!oldPass) {
+            errorPassword.textContent = "Vui lòng nhập mật khẩu cũ để đổi mật khẩu.";
+            isValid = false;
+          } else if (newPass.length < 6) {
+            errorPassword.textContent = "Mật khẩu mới phải từ 6 ký tự.";
+            isValid = false;
+          }
+        }
+
+        if (isValid) {
+          showToast("Cập nhật thành công", "Thông tin thiết lập hồ sơ đã được lưu lại.");
+          oldPassInput.value = "";
+          newPassInput.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>

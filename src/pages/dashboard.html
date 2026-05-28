@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng Điều Khiển - Fashion Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/user.css" />
+    <style>
+      .premium-gradient-gold {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      }
+      .gold-shimmer {
+        position: relative;
+        overflow: hidden;
+      }
+      .gold-shimmer::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -60%;
+        width: 30%;
+        height: 200%;
+        background: linear-gradient(
+          to right,
+          rgba(251, 191, 36, 0) 0%,
+          rgba(251, 191, 36, 0.15) 50%,
+          rgba(251, 191, 36, 0) 100%
+        );
+        transform: rotate(25deg);
+        animation: shimmer 6s infinite linear;
+      }
+      @keyframes shimmer {
+        0% { left: -150%; }
+        50% { left: 150%; }
+        100% { left: 150%; }
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
+
+    <!-- Navbar Placeholder -->
+    <nav id="navbar-placeholder" class="bg-slate-900/95 text-white sticky top-0 z-50 backdrop-blur-md border-b border-slate-800 shadow-lg">
+      <!-- Sẽ được tải động bằng main.js -->
+    </nav>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <!-- Welcome Header -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <div>
+          <span class="text-xs font-bold text-amber-500 uppercase tracking-widest bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
+            Khách hàng thân thiết
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mt-2">Xin chào, Nguyễn Trần Khánh Vy!</h1>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Chào mừng bạn quay trở lại. Hãy xem thống kê và đơn hàng mới nhất.</p>
+        </div>
+        <div class="flex gap-2">
+          <a href="/src/pages/product.html" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md hover:-translate-y-0.5 transition duration-300 flex items-center gap-1.5">
+            <i class="ri-shopping-bag-line"></i> Mua sắm ngay
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Cột Bên Trái: Thông tin Loyalty & Stats -->
+        <div class="lg:col-span-1 space-y-6">
+          
+          <!-- Thẻ thành viên VIP (Gold/Platinum style) -->
+          <div class="premium-gradient-gold gold-shimmer text-white rounded-2xl p-6 shadow-xl border border-slate-850 flex flex-col justify-between h-[210px] relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-amber-400/5 rounded-full blur-3xl"></div>
+            
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="text-[9px] font-black uppercase tracking-widest text-amber-400">Membership Card</span>
+                <h3 class="text-base font-bold tracking-wide mt-0.5">GOLD MEMBER</h3>
+              </div>
+              <span class="text-2xl text-amber-400"><i class="ri-vip-crown-fill"></i></span>
+            </div>
+
+            <div class="my-4">
+              <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Mã số thẻ</span>
+              <span class="text-sm font-mono tracking-widest font-bold text-slate-200">FS-8899-2026</span>
+            </div>
+
+            <div class="flex justify-between items-end">
+              <div>
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Tích điểm</span>
+                <span class="text-lg font-extrabold text-amber-400">1,585 pts</span>
+              </div>
+              <div class="text-right">
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Hạn mức</span>
+                <span class="text-xs font-bold text-slate-200">Vô thời hạn</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thanh tiến trình nâng hạng -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/60 shadow-sm space-y-3">
+            <div class="flex justify-between items-center text-xs font-semibold">
+              <span class="text-slate-500">Tiến trình lên hạng VIP Platinum</span>
+              <span class="text-amber-500">75%</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-2">
+              <div class="bg-amber-400 h-2 rounded-full transition-all duration-500" style="width: 75%"></div>
+            </div>
+            <p class="text-[10px] text-slate-400">Tích lũy thêm <span class="font-bold text-slate-700">415,000 đ</span> trước 31/12/2026 để tự động nâng hạng thẻ VIP Platinum.</p>
+          </div>
+
+          <!-- Quick statistics -->
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200/60 shadow-sm text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Đơn mua</span>
+              <span class="text-lg font-black text-slate-900 mt-1 block">8</span>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200/60 shadow-sm text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Yêu thích</span>
+              <span class="text-lg font-black text-red-500 mt-1 block">12</span>
+            </div>
+            <div class="bg-white rounded-xl p-3.5 border border-slate-200/60 shadow-sm text-center">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Ưu đãi</span>
+              <span class="text-lg font-black text-amber-500 mt-1 block">3</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Cột Bên Phải: Biểu đồ chi tiêu & Đơn hàng gần đây -->
+        <div class="lg:col-span-2 space-y-6">
+          
+          <!-- Spending Chart Block (Premium SVG styled layout) -->
+          <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/60 shadow-sm">
+            <div class="flex justify-between items-center mb-6">
+              <div>
+                <h3 class="text-base font-extrabold text-slate-900">Chi Tiêu Mua Sắm Năm 2026</h3>
+                <p class="text-[10px] sm:text-xs text-slate-400">Xu hướng chi tiêu của bạn theo từng tháng.</p>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-slate-400">Tổng đã mua</span>
+                <span class="text-sm sm:text-base font-black text-red-500 block">15,850,000 đ</span>
+              </div>
+            </div>
+
+            <!-- SVG Chart -->
+            <div class="w-full h-48 sm:h-56 mt-4">
+              <svg viewBox="0 0 500 200" class="w-full h-full" preserveAspectRatio="none">
+                <!-- Grid Lines -->
+                <line x1="40" y1="20" x2="480" y2="20" stroke="#f1f5f9" stroke-width="1.5" stroke-dasharray="3"/>
+                <line x1="40" y1="70" x2="480" y2="70" stroke="#f1f5f9" stroke-width="1.5" stroke-dasharray="3"/>
+                <line x1="40" y1="120" x2="480" y2="120" stroke="#f1f5f9" stroke-width="1.5" stroke-dasharray="3"/>
+                <line x1="40" y1="170" x2="480" y2="170" stroke="#e2e8f0" stroke-width="1.5"/>
+
+                <!-- Spending Bars Gradient definition -->
+                <defs>
+                  <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#fbbf24" />
+                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.2"/>
+                  </linearGradient>
+                  <linearGradient id="activeBarGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#f59e0b" />
+                    <stop offset="100%" stop-color="#d97706" />
+                  </linearGradient>
+                </defs>
+
+                <!-- Bars (T1 to T5 spendings) -->
+                <!-- T1: 1,200k -->
+                <rect x="70" y="120" width="30" height="50" rx="4" fill="url(#barGrad)" class="transition-all duration-300 hover:fill-amber-500 cursor-pointer"/>
+                <!-- T2: 2,500k -->
+                <rect x="150" y="70" width="30" height="100" rx="4" fill="url(#barGrad)" class="transition-all duration-300 hover:fill-amber-500 cursor-pointer"/>
+                <!-- T3: 4,500k -->
+                <rect x="230" y="30" width="30" height="140" rx="4" fill="url(#barGrad)" class="transition-all duration-300 hover:fill-amber-500 cursor-pointer"/>
+                <!-- T4: 1,800k -->
+                <rect x="310" y="100" width="30" height="70" rx="4" fill="url(#barGrad)" class="transition-all duration-300 hover:fill-amber-500 cursor-pointer"/>
+                <!-- T5 (Current): 5,850k -->
+                <rect x="390" y="15" width="30" height="155" rx="4" fill="url(#activeBarGrad)" class="transition-all duration-300 hover:opacity-90 cursor-pointer"/>
+
+                <!-- X Axis Text -->
+                <text x="85" y="188" fill="#94a3b8" font-size="8" text-anchor="middle" font-weight="600">Tháng 1</text>
+                <text x="165" y="188" fill="#94a3b8" font-size="8" text-anchor="middle" font-weight="600">Tháng 2</text>
+                <text x="245" y="188" fill="#94a3b8" font-size="8" text-anchor="middle" font-weight="600">Tháng 3</text>
+                <text x="325" y="188" fill="#94a3b8" font-size="8" text-anchor="middle" font-weight="600">Tháng 4</text>
+                <text x="405" y="188" fill="#d97706" font-size="8" text-anchor="middle" font-weight="700">Tháng 5</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Recent Orders Block -->
+          <div class="bg-white rounded-2xl border border-slate-200/60 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-slate-100 flex justify-between items-center">
+              <h3 class="text-base font-extrabold text-slate-900">Đơn Hàng Gần Đây</h3>
+              <span class="text-[10px] font-bold text-slate-400 uppercase">Tất cả đơn hàng (8)</span>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-slate-50 text-slate-500 uppercase font-bold border-b border-slate-100">
+                    <th class="p-4">Mã đơn</th>
+                    <th class="p-4">Ngày đặt</th>
+                    <th class="p-4">Sản phẩm</th>
+                    <th class="p-4">Tổng tiền</th>
+                    <th class="p-4">Vận chuyển</th>
+                    <th class="p-4 text-center">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-700">
+                  <!-- Đơn hàng 1 -->
+                  <tr class="hover:bg-slate-50/50 transition">
+                    <td class="p-4 font-bold text-slate-950">#FS-90812</td>
+                    <td class="p-4 text-slate-400">28/05/2026</td>
+                    <td class="p-4 font-medium max-w-[160px] truncate">Giày Sneaker Nike Air Max Pro (+1)</td>
+                    <td class="p-4 font-bold text-slate-950">1,850,000 đ</td>
+                    <td class="p-4">
+                      <span class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full font-bold text-[9px] uppercase border border-blue-100">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Đang giao
+                      </span>
+                    </td>
+                    <td class="p-4 text-center">
+                      <button class="text-amber-500 hover:text-amber-600 font-bold transition">Xem</button>
+                    </td>
+                  </tr>
+
+                  <!-- Đơn hàng 2 -->
+                  <tr class="hover:bg-slate-50/50 transition">
+                    <td class="p-4 font-bold text-slate-950">#FS-88712</td>
+                    <td class="p-4 text-slate-400">12/04/2026</td>
+                    <td class="p-4 font-medium max-w-[160px] truncate">Áo Khoác Bomber Unisex Cực Chất</td>
+                    <td class="p-4 font-bold text-slate-950">450,000 đ</td>
+                    <td class="p-4">
+                      <span class="inline-flex items-center gap-1 bg-green-50 text-green-600 px-2 py-0.5 rounded-full font-bold text-[9px] uppercase border border-green-100">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Hoàn thành
+                      </span>
+                    </td>
+                    <td class="p-4 text-center">
+                      <button class="text-amber-500 hover:text-amber-600 font-bold transition">Xem</button>
+                    </td>
+                  </tr>
+
+                  <!-- Đơn hàng 3 -->
+                  <tr class="hover:bg-slate-50/50 transition">
+                    <td class="p-4 font-bold text-slate-950">#FS-85412</td>
+                    <td class="p-4 text-slate-400">08/02/2026</td>
+                    <td class="p-4 font-medium max-w-[160px] truncate">Giày Adidas Ultraboost 4.0 (+2)</td>
+                    <td class="p-4 font-bold text-slate-950">4,120,000 đ</td>
+                    <td class="p-4">
+                      <span class="inline-flex items-center gap-1 bg-green-50 text-green-600 px-2 py-0.5 rounded-full font-bold text-[9px] uppercase border border-green-100">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Hoàn thành
+                      </span>
+                    </td>
+                    <td class="p-4 text-center">
+                      <button class="text-amber-500 hover:text-amber-600 font-bold transition">Xem</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Account Settings Tab/Form -->
+          <div class="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200/60 shadow-sm">
+            <h3 class="text-base font-extrabold text-slate-900 mb-6">Thông Tin Tài Khoản</h3>
+            
+            <form id="form-update-profile" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Họ và tên</label>
+                  <input
+                    type="text"
+                    value="Nguyễn Trần Khánh Vy"
+                    class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                  />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Số điện thoại</label>
+                  <input
+                    type="tel"
+                    value="0987654321"
+                    class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Email</label>
+                  <input
+                    type="email"
+                    value="alice@gmail.com"
+                    disabled
+                    class="w-full bg-slate-100 border border-slate-200 text-xs text-slate-400 rounded-xl px-4 py-3 cursor-not-allowed focus:outline-none"
+                  />
+                  <span class="text-[9px] text-slate-400 mt-1 block">Liên hệ CSKH để đổi email xác thực.</span>
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Mật khẩu mới</label>
+                  <input
+                    type="password"
+                    placeholder="Để trống nếu không muốn đổi mật khẩu"
+                    class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1.5">Địa chỉ giao hàng mặc định</label>
+                <textarea
+                  rows="2"
+                  class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+                >123 Đường Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</textarea>
+              </div>
+
+              <div class="flex justify-end pt-2">
+                <button
+                  type="submit"
+                  class="bg-amber-400 hover:bg-amber-300 text-slate-900 text-xs font-bold py-3 px-6 rounded-xl shadow-md hover:-translate-y-0.5 transition duration-300"
+                >
+                  Cập nhật thông tin
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
+  </body>
+</html>

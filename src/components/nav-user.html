@@ -1,7 +1,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-8">
-            <a href="#" class="text-xl font-black tracking-wider text-amber-400"
+            <a href="/index.html" class="text-xl font-black tracking-wider text-amber-400"
               >👟 FASHION SHOP</a
             >
 
@@ -810,7 +810,7 @@
                 >Sản phẩm</a
               >
               <a
-                href="#"
+                href="/src/pages/about.html"
                 class="px-3 py-2 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
                 >Giới thiệu</a
               >
@@ -818,8 +818,8 @@
           </div>
 
           <div class="flex items-center gap-2 sm:gap-4">
-            <button
-              onclick="toggleModal('favoriteModal')"
+            <a
+              href="/src/pages/favorite.html"
               class="relative p-2 text-slate-300 hover:text-red-500 transition"
             >
               <i class="ri-heart-3-fill text-xl"></i>
@@ -827,9 +827,9 @@
                 class="absolute top-1 right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white bg-red-500 rounded-full"
                 >2</span
               >
-            </button>
-            <button
-              onclick="toggleModal('cartModal')"
+            </a>
+            <a
+              href="/src/pages/cart.html"
               class="relative p-2 text-slate-300 hover:text-amber-400 transition"
             >
               <i class="ri-shopping-bag-3-fill text-xl"></i>
@@ -837,7 +837,7 @@
                 class="absolute top-1 right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-slate-900 bg-amber-400 rounded-full"
                 >3</span
               >
-            </button>
+            </a>
             <div
               class="flex items-center gap-2 border-l border-slate-700 pl-4 relative"
             >
@@ -867,14 +867,20 @@
                   </p>
                 </div>
                 <a
-                  href="#user-profile"
+                  href="/src/pages/dashboard.html"
+                  class="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 hover:text-amber-500 transition"
+                >
+                  <i class="ri-dashboard-line text-slate-400"></i> Bảng điều khiển
+                </a>
+                <a
+                  href="/src/pages/profile.html"
                   class="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 hover:text-amber-500 transition"
                 >
                   <i class="ri-user-3-line text-slate-400"></i> Tài khoản của
                   tôi
                 </a>
                 <a
-                  href="#user-orders"
+                  href="/src/pages/order.html"
                   class="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-slate-50 hover:text-amber-500 transition"
                 >
                   <i class="ri-file-list-3-line text-slate-400"></i> Đơn hàng đã
