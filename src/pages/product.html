@@ -3,19 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" />
-    <script>
-      (function () {
-        const isGitHubPages = window.location.hostname.endsWith("github.io");
-        if (isGitHubPages) {
-          const repo =
-            window.location.pathname.split("/").filter(Boolean)[0] || "";
-          window.APP_ROOT = repo ? `/${repo}/` : "/";
-        } else {
-          window.APP_ROOT = "/";
-        }
-      })();
-    </script>
     <title>Sản Phẩm - Fashion Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -26,7 +13,7 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/css/user.css" />
+    <link rel="stylesheet" href="../css/user.css" />
   </head>
   <body
     class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']"

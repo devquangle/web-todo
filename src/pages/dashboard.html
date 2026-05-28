@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
-    <script>
-      (function () {
-        const isGitHubPages = window.location.hostname.endsWith("github.io");
-        if (isGitHubPages) {
-          const repo = window.location.pathname.split("/").filter(Boolean)[0] || "";
-          window.APP_ROOT = repo ? `/${repo}/` : "/";
-        } else {
-          window.APP_ROOT = "/";
-        }
-      })();
-    </script>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" />
+    
     <title>Bảng Điều Khiển - Fashion Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -25,7 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/css/user.css" />
+    <link rel="stylesheet" href="../css/user.css" />
     <style>
       .premium-gradient-gold {
         background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
@@ -75,7 +65,7 @@
           <p class="text-xs sm:text-sm text-slate-500 mt-1">Chào mừng bạn quay trở lại. Hãy xem thống kê và đơn hàng mới nhất.</p>
         </div>
         <div class="flex gap-2">
-          <a href="src/pages/product.html" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md hover:-translate-y-0.5 transition duration-300 flex items-center gap-1.5">
+          <a href="./product.html" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md hover:-translate-y-0.5 transition duration-300 flex items-center gap-1.5">
             <i class="ri-shopping-bag-line"></i> Mua sắm ngay
           </a>
         </div>

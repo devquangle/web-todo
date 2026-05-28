@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
-    <script>
-      (function () {
-        const isGitHubPages = window.location.hostname.endsWith("github.io");
-        if (isGitHubPages) {
-          const repo = window.location.pathname.split("/").filter(Boolean)[0] || "";
-          window.APP_ROOT = repo ? `/${repo}/` : "/";
-        } else {
-          window.APP_ROOT = "/";
-        }
-      })();
-    </script>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" />
+    
     <title>Sản Phẩm Yêu Thích - Fashion Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -25,7 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/css/user.css" />
+    <link rel="stylesheet" href="../css/user.css" />
   </head>
   <body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']">
 
@@ -65,8 +55,8 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-    <script src="/src/index.js"></script>
-    <script src="/src/main.js"></script>
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
     <!-- Wishlist JavaScript -->
     <script>
       let favorites = [
@@ -124,7 +114,7 @@
               <span class="text-5xl"><i class="ri-heart-3-line text-slate-300"></i></span>
               <h3 class="text-sm font-bold text-slate-700 mt-4">Danh sách yêu thích trống</h3>
               <p class="text-xs text-slate-400 mt-1 mb-6">Hãy dạo quanh cửa hàng và chọn những mẫu sneakers bạn thích.</p>
-              <a href="src/pages/product.html" class="inline-block bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-3 px-6 rounded-xl shadow-md transition">
+              <a href="./product.html" class="inline-block bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-3 px-6 rounded-xl shadow-md transition">
                 Khám phá sản phẩm
               </a>
             </div>

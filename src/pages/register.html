@@ -3,19 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/" />
-    <script>
-      (function () {
-        const isGitHubPages = window.location.hostname.endsWith("github.io");
-        if (isGitHubPages) {
-          const repo =
-            window.location.pathname.split("/").filter(Boolean)[0] || "";
-          window.APP_ROOT = repo ? `/${repo}/` : "/";
-        } else {
-          window.APP_ROOT = "/";
-        }
-      })();
-    </script>
     <title>Đăng Ký - Fashion Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -26,7 +13,7 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/css/user.css" />
+    <link rel="stylesheet" href="../css/user.css" />
   </head>
   <body
     class="bg-slate-50 text-slate-800 flex flex-col min-h-screen font-['Inter']"
@@ -46,7 +33,7 @@
       >
         <div class="text-center space-y-2">
           <a
-            href="/"
+            href="../../index.html"
             class="text-2xl font-black tracking-wider text-amber-500 inline-block"
             >👟 FASHION SHOP</a
           >
@@ -159,7 +146,7 @@
         >
           Đã có tài khoản?
           <a
-            href="src/pages/login.html"
+            href="./login.html"
             class="text-amber-500 hover:text-amber-600 font-bold transition"
             >Đăng nhập ngay</a
           >
@@ -252,7 +239,7 @@
             "Đăng ký thành công! Đang chuyển hướng sang Đăng nhập...";
 
           setTimeout(() => {
-            window.location.href = "src/pages/login.html";
+            window.location.href = "./login.html";
           }, 2000);
         } else {
           statusBox.className =
