@@ -17,5 +17,5 @@ async function loadComponent(id, file) {
 
 // Gọi hàm với đường dẫn tương đối tính từ file HTML hiện tại
 // Nếu bạn đang ở index.html (gốc), dùng:
-loadComponent('navbar-placeholder', 'src/components/nav-user.html');
-loadComponent('footer-placeholder', 'src/components/footer-user.html');
+loadComponent('navbar-placeholder', '../components/nav-user.html');
+loadComponent('footer-placeholder', '../components/footer-user.html');
