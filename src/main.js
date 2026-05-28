@@ -21,6 +21,6 @@ async function loadComponent(id, file) {
 
 // Gọi hàm sau khi trang đã load xong để đảm bảo APP_ROOT đã sẵn sàng
 document.addEventListener('DOMContentLoaded', () => {
-    loadComponent('navbar-placeholder', '/src/components/nav-user.html');
-    loadComponent('footer-placeholder', '/src/components/footer-user.html');
+    loadComponent('navbar-placeholder', 'src/components/nav-user.html');
+    loadComponent('footer-placeholder', 'src/components/footer-user.html');
 });

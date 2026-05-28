@@ -2,14 +2,17 @@
 <html lang="vi">
   <head>
     <script>
-      // Định nghĩa đường dẫn gốc theo "thư mục hiện tại" của URL.
-      // Cách này tránh lỗi bị lồng path kiểu '/web-todo/web-todo/' trên Pages.
-      // PHẢI set <base> ngay lúc parse HTML (không đợi DOMContentLoaded),
-      // nếu không CSS/JS sẽ request sai và bị 404.
+      // APP_ROOT dùng cho fetch component / link nội bộ.
+      // - GitHub Pages (user.github.io/<repo>/...): dùng '/<repo>/'
+      // - Local/dev: luôn dùng '/'
       (function () {
-        const root = new URL(".", window.location.href).pathname;
-        window.APP_ROOT = root.endsWith("/") ? root : root + "/";
-        document.write('<base href="' + window.APP_ROOT + '">');
+        const isGitHubPages = window.location.hostname.endsWith("github.io");
+        if (isGitHubPages) {
+          const repo = window.location.pathname.split("/").filter(Boolean)[0] || "";
+          window.APP_ROOT = repo ? `/${repo}/` : "/";
+        } else {
+          window.APP_ROOT = "/";
+        }
       })();
     </script>
     <script>
