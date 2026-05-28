@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
+    <script>
+      window.APP_ROOT = window.location.hostname.includes("github.io")
+        ? "/web-todo/"
+        : "/";
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/web-todo/" />
@@ -50,7 +55,6 @@
 
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
-
 
     <script src="/src/index.js"></script>
     <script src="/src/main.js"></script>
@@ -198,7 +202,7 @@
                       <span class="text-base font-black text-red-500">${formatPrice(order.total)}</span>
                     </div>
                     
-                    <a href="/src/pages/order-item.html?id=${order.id}" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 px-4 rounded-xl transition shadow-md hover:-translate-y-0.5">
+                    <a href="src/pages/order-item.html?id=${order.id}" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 px-4 rounded-xl transition shadow-md hover:-translate-y-0.5">
                       Xem chi tiết
                     </a>
                   </div>

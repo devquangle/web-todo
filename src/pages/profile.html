@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="/web-todo/" />
+  <script>
+      window.APP_ROOT = window.location.hostname.includes("github.io")
+        ? "/web-todo/"
+        : "/";
+    </script>
     <title>Hồ Sơ Cá Nhân - Fashion Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -171,9 +175,8 @@
     <div id="footer-placeholder"></div>
 
   
-    <script src="/src/index.js"></script>
-    <script src="/src/main.js"></script>
-
+    <script src="../index.js"></script>
+    <script src="../main.js"></script>
     <!-- Profile simulation logic -->
     <script>
       const formProfile = document.getElementById("profile-form");

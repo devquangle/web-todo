@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <script>
+      window.APP_ROOT = window.location.hostname.includes("github.io")
+        ? "/web-todo/"
+        : "/";
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/web-todo/" />
     <title>Login</title>
