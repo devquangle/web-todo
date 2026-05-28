@@ -10,15 +10,12 @@ async function loadComponent(id, file) {
         element.innerHTML = data;
     } catch (error) {
         console.error("Lỗi khi tải component:", error);
-    }
-}
+// Lấy đường dẫn tuyệt đối của chính tệp main.js đang được chạy
+// Điều này giúp xác định chính xác thư mục chứa các component dùng chung (src/components)
+// mà không cần quan tâm đến URL hay độ sâu thư mục của trang HTML đang tải nó.
+const scriptUrl = document.currentScript.src;
+const srcDirectory = scriptUrl.substring(0, scriptUrl.lastIndexOf('/'));
 
-// Xác định đường dẫn gốc tương đối dựa trên vị trí của file HTML hiện tại
-// Nếu trang hiện tại nằm trong thư mục con '/src/pages/', tiền tố sẽ là '../'
-// Nếu trang hiện tại nằm ở thư mục gốc (index.html), tiền tố sẽ là './src/'
-const isSubPage = window.location.pathname.includes('/src/pages/');
-const basePath = isSubPage ? '../' : './src/';
-
-// Gọi hàm tải động các thành phần giao diện dùng chung
-loadComponent('navbar-placeholder', basePath + 'components/nav-user.html');
-loadComponent('footer-placeholder', basePath + 'components/footer-user.html');
+// Gọi hàm tải động các thành phần giao diện dùng chung bằng đường dẫn tuyệt đối động
+loadComponent('navbar-placeholder', srcDirectory + '/components/nav-user.html');
+loadComponent('footer-placeholder', srcDirectory + '/components/footer-user.html');
