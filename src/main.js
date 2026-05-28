@@ -1,6 +1,6 @@
 async function loadComponent(id, file) {
     const element = document.getElementById(id);
-    
+    const url = window.location.origin + file;
     // Kiểm tra: Nếu không tìm thấy element thì thoát hàm ngay lập tức
     if (!element) {
         console.warn(`Không tìm thấy phần tử có ID: ${id}. Bỏ qua.`);
@@ -8,7 +8,7 @@ async function loadComponent(id, file) {
     }
 
     try {
-        const response = await fetch(file);
+        const response = await fetch(url);
         if (!response.ok) throw new Error(`Lỗi tải file: ${file}`);
         const data = await response.text();
         element.innerHTML = data;
