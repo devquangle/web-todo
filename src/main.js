@@ -34,8 +34,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const isPage = isInPagesFolder();
   const componentBase = isPage ? "../components/" : "src/components/";
 
+  // Load navbar và đợi nó hoàn tất
   await loadComponent("navbar-placeholder", `${componentBase}nav-user.html`);
   applyRootHrefOverrides(document.getElementById("navbar-placeholder") || document);
+
+  // SAU KHI LOAD XONG NAVBAR, KÍCH HOẠT LOGIC MENU
+  if (typeof window.initUserDropdown === 'function') {
+    window.initUserDropdown();
+  }
 
   await loadComponent("footer-placeholder", `${componentBase}footer-user.html`);
 });
