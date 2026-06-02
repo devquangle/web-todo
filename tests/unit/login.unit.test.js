@@ -6,7 +6,7 @@ if (typeof window === 'undefined') {
   global.window = {};
 }
 window.updateCartFavoriteVisibility = vi.fn();
-window.initUserDropdown = vi.fn();np
+window.initUserDropdown = vi.fn();
 const store = new Map();
 
 const mockStorage = {
@@ -74,7 +74,7 @@ describe("LoginService", () => {
       });
 
       expect(result.success).toBe(false);
-      expect(result.message).toContain("Invalid email or password");
+      expect(result.message).toBe("Invalid email or password.");
     });
 
     // Kiểm tra trường hợp đăng nhập thành công
