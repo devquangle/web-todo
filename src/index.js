@@ -6,22 +6,70 @@ function toggleModal(id) {
   if (modal) modal.classList.toggle("hidden");
 }
 
+function setMegaMenuOpen(open) {
+  const megaMenu = document.getElementById("megaMenu");
+  const megaMenuBtnIcon = document.querySelector("#megaMenuBtn i");
+  const mobileMegaMenuIcon = document.getElementById("mobileMegaMenuIcon");
+
+  if (!megaMenu) return;
+
+  megaMenu.classList.toggle("hidden", !open);
+  const rotation = open ? "rotate(180deg)" : "rotate(0deg)";
+  if (megaMenuBtnIcon) megaMenuBtnIcon.style.transform = rotation;
+  if (mobileMegaMenuIcon) mobileMegaMenuIcon.style.transform = rotation;
+}
+
 function toggleMegaMenu(event) {
   event.stopPropagation();
   const megaMenu = document.getElementById("megaMenu");
   const userDropdown = document.getElementById("userDropdown");
-  const megaMenuBtnIcon = document.querySelector("#megaMenuBtn i");
 
   if (!megaMenu) return;
 
-  // Đóng user dropdown khi mở mega menu
   if (userDropdown) userDropdown.classList.add("hidden");
 
-  const isHidden = megaMenu.classList.toggle("hidden");
-  if (megaMenuBtnIcon) {
-    megaMenuBtnIcon.style.transform = isHidden ? "rotate(0deg)" : "rotate(180deg)";
+  const willOpen = megaMenu.classList.contains("hidden");
+  if (willOpen && window.matchMedia("(max-width: 767px)").matches) {
+    closeMobileMenu();
+  }
+  setMegaMenuOpen(willOpen);
+}
+
+function closeMobileMenu() {
+  const mobileMenu = document.getElementById("mobileMenu");
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenuIcon = document.getElementById("mobileMenuIcon");
+
+  mobileMenu?.classList.add("hidden");
+  mobileMenuBtn?.setAttribute("aria-expanded", "false");
+  if (mobileMenuIcon) {
+    mobileMenuIcon.classList.remove("ri-close-line");
+    mobileMenuIcon.classList.add("ri-menu-line");
   }
 }
+
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById("mobileMenu");
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenuIcon = document.getElementById("mobileMenuIcon");
+
+  if (!mobileMenu) return;
+
+  const willOpen = mobileMenu.classList.contains("hidden");
+  mobileMenu.classList.toggle("hidden", !willOpen);
+  mobileMenuBtn?.setAttribute("aria-expanded", willOpen ? "true" : "false");
+
+  if (mobileMenuIcon) {
+    mobileMenuIcon.classList.toggle("ri-menu-line", !willOpen);
+    mobileMenuIcon.classList.toggle("ri-close-line", willOpen);
+  }
+
+  if (!willOpen) setMegaMenuOpen(false);
+}
+
+window.toggleMobileMenu = toggleMobileMenu;
+window.toggleMegaMenu = toggleMegaMenu;
+window.closeMobileMenu = closeMobileMenu;
 // Thay thế cho onclick="toggleSubAccordion(this)"
 document.addEventListener("click", (e) => {
   // Tìm xem phần tử được click có class .accordion-trigger hay không
@@ -110,6 +158,11 @@ window.initUserDropdown = function() {
 // 3. XỬ LÝ SỰ KIỆN CLICK TOÀN CỤC (Event Delegation)
 // =========================
 document.addEventListener("click", (e) => {
+  if (e.target.closest("#mobileMenu a[href]")) {
+    closeMobileMenu();
+    setMegaMenuOpen(false);
+  }
+
   const userMenuBtn = document.getElementById("userMenuBtn");
   const userDropdown = document.getElementById("userDropdown");
   const arrowIcon = document.getElementById("arrowIcon");
@@ -120,9 +173,7 @@ document.addEventListener("click", (e) => {
   if (userMenuBtn.contains(e.target)) {
     e.stopPropagation();
     
-    // Đóng Mega Menu nếu nó đang mở
-    const megaMenu = document.getElementById("megaMenu");
-    if (megaMenu) megaMenu.classList.add("hidden");
+    setMegaMenuOpen(false);
 
     userDropdown.classList.toggle("hidden");
     arrowIcon?.classList.toggle("rotate-180");
@@ -131,6 +182,31 @@ document.addEventListener("click", (e) => {
   else if (!userDropdown.contains(e.target)) {
     userDropdown.classList.add("hidden");
     arrowIcon?.classList.remove("rotate-180");
+  }
+
+  const megaMenu = document.getElementById("megaMenu");
+  const megaMenuBtn = document.getElementById("megaMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const clickedMega =
+    megaMenu?.contains(e.target) ||
+    megaMenuBtn?.contains(e.target) ||
+    e.target.closest("#mobileMenu button");
+  if (megaMenu && !clickedMega && !megaMenu.classList.contains("hidden")) {
+    setMegaMenuOpen(false);
+  }
+
+  const clickedMobileNav =
+    mobileMenu?.contains(e.target) || mobileMenuBtn?.contains(e.target);
+  if (mobileMenu && !clickedMobileNav && !mobileMenu.classList.contains("hidden")) {
+    closeMobileMenu();
+    setMegaMenuOpen(false);
+  }
+});
+
+window.addEventListener("resize", () => {
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    closeMobileMenu();
   }
 });
 

@@ -1,14 +1,26 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between h-16">
-    <div class="flex items-center gap-8">
+  <div class="relative w-full overflow-x-clip">
+  <div class="flex items-center justify-between h-16 gap-2">
+    <div class="flex items-center gap-2 sm:gap-4 md:gap-8 min-w-0 flex-1">
+      <button
+        id="mobileMenuBtn"
+        type="button"
+        onclick="toggleMobileMenu()"
+        class="md:hidden shrink-0 p-2 rounded-xl text-slate-300 hover:bg-slate-800 hover:text-white transition focus:outline-none"
+        aria-label="Mở menu"
+        aria-expanded="false"
+      >
+        <i class="ri-menu-line text-2xl" id="mobileMenuIcon"></i>
+      </button>
+
       <a
         href="../../index.html"
         data-root-href="./index.html"
-        class="text-xl font-black tracking-wider text-amber-400"
+        class="text-base sm:text-xl font-black tracking-wide sm:tracking-wider text-amber-400 truncate shrink min-w-0"
         >👟 FASHION SHOP</a
       >
 
-      <div class="md:flex space-x-2 relative">
+      <div class="max-md:hidden flex space-x-2 relative">
         <div class="inline-block">
           <button
             onclick="toggleMegaMenu(event)"
@@ -20,12 +32,114 @@
               class="ri-arrow-down-s-line text-xs pointer-events-none transition-transform duration-200"
             ></i>
           </button>
+        </div>
 
-          <div
-            id="megaMenu"
-            class="hidden absolute -left-[230px] top-12 w-[1220px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-8 z-50 text-slate-800 grid grid-cols-4 gap-6 animate-fade-in select-none"
-          >
-            <div class="flex flex-col h-[400px]">
+        <a
+          href="./product.html"
+          data-root-href="src/pages/product.html"
+          class="px-3 py-2 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
+          >Sản phẩm</a
+        >
+        <a
+          href="./about.html"
+          data-root-href="src/pages/about.html"
+          class="px-3 py-2 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
+          >Giới thiệu</a
+        >
+      </div>
+    </div>
+
+    <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+      <!-- Favorite -->
+      <a
+        href="./favorite.html"
+        data-root-href="src/pages/favorite.html"
+        class="relative p-2 text-slate-300 hover:text-red-500 transition"
+      >
+        <i class="ri-heart-3-fill text-xl"></i>
+
+        <span
+          id="favoriteCount"
+          class="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold leading-none text-white bg-red-500 rounded-full"
+        >
+          2
+        </span>
+      </a>
+
+      <!-- Cart -->
+      <a
+        href="./cart.html"
+        data-root-href="src/pages/cart.html"
+        class="relative p-2 text-slate-300 hover:text-amber-400 transition"
+      >
+        <i class="ri-shopping-bag-3-fill text-xl"></i>
+
+        <span
+          id="cartCount"
+          class="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold leading-none text-slate-900 bg-amber-400 rounded-full"
+        >
+          3
+        </span>
+      </a>
+
+      <!-- User -->
+      <div
+        class="relative flex items-center gap-1 sm:gap-2 border-l border-slate-700 pl-2 sm:pl-4"
+      >
+        <button id="userMenuBtn" type="button" class="flex items-center gap-1">
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"
+            class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-amber-400 object-cover"
+            alt=""
+          />
+
+          <i
+            id="arrowIcon"
+            class="ri-arrow-down-s-line text-slate-400 text-lg transition hidden sm:block"
+          ></i>
+        </button>
+
+        <!-- Dropdown -->
+        <div
+          id="userDropdown"
+          class="hidden absolute right-0 top-12 sm:top-14 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <div
+    id="mobileMenu"
+    class="hidden md:hidden border-t border-slate-800 py-3 space-y-1"
+  >
+    <button
+      type="button"
+      onclick="toggleMegaMenu(event)"
+      class="flex w-full items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
+    >
+      Danh mục
+      <i class="ri-arrow-down-s-line text-xs transition-transform duration-200" id="mobileMegaMenuIcon"></i>
+    </button>
+    <a
+      href="./product.html"
+      data-root-href="src/pages/product.html"
+      class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
+      >Sản phẩm</a
+    >
+    <a
+      href="./about.html"
+      data-root-href="src/pages/about.html"
+      class="block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
+      >Giới thiệu</a
+    >
+  </div>
+
+  <div
+    id="megaMenu"
+    class="mega-menu-panel hidden max-md:fixed max-md:inset-x-4 max-md:top-[4.25rem] md:absolute md:left-0 md:right-0 md:top-full md:mt-2 z-[60] w-full max-w-full min-w-0 box-border bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 md:p-6 text-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-h-[min(75vh,calc(100vh-5.5rem))] overflow-y-auto overflow-x-hidden animate-fade-in select-none"
+  >
+            <div class="flex flex-col min-w-0 min-h-0 md:h-[400px]">
               <h3
                 class="text-base font-bold text-slate-950 tracking-wide flex items-center gap-1 mb-4 uppercase shrink-0"
               >
@@ -215,7 +329,7 @@
             </div>
 
             <div
-              class="flex flex-col h-[400px] border-l border-slate-100/80 pl-6"
+              class="flex flex-col min-w-0 min-h-0 md:h-[400px] lg:border-l lg:border-slate-100/80 lg:pl-4 xl:pl-6 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100/80"
             >
               <h3
                 class="text-base font-bold text-slate-950 tracking-wide flex items-center gap-1 mb-4 uppercase shrink-0"
@@ -399,7 +513,7 @@
             </div>
 
             <div
-              class="flex flex-col h-[400px] border-l border-slate-100/80 pl-6"
+              class="flex flex-col min-w-0 min-h-0 md:h-[400px] lg:border-l lg:border-slate-100/80 lg:pl-4 xl:pl-6 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100/80"
             >
               <h3
                 class="text-base font-bold text-slate-950 tracking-wide flex items-center gap-1 mb-4 uppercase shrink-0"
@@ -562,7 +676,7 @@
             </div>
 
             <div
-              class="flex flex-col h-[400px] border-l border-slate-100/80 pl-6"
+              class="flex flex-col min-w-0 min-h-0 md:h-[400px] lg:border-l lg:border-slate-100/80 lg:pl-4 xl:pl-6 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100/80"
             >
               <h3
                 class="text-base font-bold text-slate-950 tracking-wide flex items-center gap-1 mb-4 uppercase shrink-0"
@@ -796,80 +910,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <a
-          href="./product.html"
-          data-root-href="src/pages/product.html"
-          class="px-3 py-2 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
-          >Sản phẩm</a
-        >
-        <a
-          href="./about.html"
-          data-root-href="src/pages/about.html"
-          class="px-3 py-2 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition"
-          >Giới thiệu</a
-        >
-      </div>
-    </div>
-
-    <div class="flex items-center gap-2 sm:gap-4">
-      <!-- Favorite -->
-      <a
-        href="./favorite.html"
-        data-root-href="src/pages/favorite.html"
-        class="relative p-2 text-slate-300 hover:text-red-500 transition"
-      >
-        <i class="ri-heart-3-fill text-xl"></i>
-
-        <span
-          id="favoriteCount"
-          class="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold leading-none text-white bg-red-500 rounded-full"
-        >
-          2
-        </span>
-      </a>
-
-      <!-- Cart -->
-      <a
-        href="./cart.html"
-        data-root-href="src/pages/cart.html"
-        class="relative p-2 text-slate-300 hover:text-amber-400 transition"
-      >
-        <i class="ri-shopping-bag-3-fill text-xl"></i>
-
-        <span
-          id="cartCount"
-          class="absolute -top-1 -right-1 inline-flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold leading-none text-slate-900 bg-amber-400 rounded-full"
-        >
-          3
-        </span>
-      </a>
-
-      <!-- User -->
-      <div
-        class="relative flex items-center gap-2 border-l border-slate-700 pl-4"
-      >
-        <button id="userMenuBtn"  type="button" class="flex items-center gap-1">
-          <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"
-            class="w-10 h-10 rounded-full border-2 border-amber-400 object-cover"
-            alt=""
-          />
-
-          <i
-            id="arrowIcon"
-            class="ri-arrow-down-s-line text-slate-400 text-lg transition"
-          ></i>
-        </button>
-
-        <!-- Dropdown -->
-        <div
-          id="userDropdown"
-          class="hidden absolute right-0 top-14 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50"
-        ></div>
-      </div>
-    </div>
+  </div>
   </div>
 </div>

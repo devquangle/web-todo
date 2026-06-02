@@ -2,6 +2,17 @@ body {
   font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
 }
+
+#navbar-placeholder {
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+#navbar-placeholder .mega-menu-panel {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 /* Tùy biến thanh cuộn chuẩn thiết kế cho cả 3 cột */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px; /* Độ mảnh của thanh cuộn */
@@ -22,5 +33,5 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #94a3b8; /* Đậm lên một chút khi di chuột vào (slate-400) */
 }
-.hidden { display: none !important; }
+/* Do not override Tailwind .hidden with !important — it breaks responsive utilities like hidden md:flex */
 .rotate-180 { transform: rotate(180deg); }
