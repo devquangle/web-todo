@@ -134,7 +134,7 @@ window.initUserDropdown = function () {
     userDropdown.innerHTML = `
       <div class="px-4 py-3 border-b border-slate-100">
         <p class="text-xs text-slate-400">Xin chào 👋</p>
-        <p class="text-sm font-semibold truncate">${user.name || user.email}</p>
+        <p class="text-sm font-semibold truncate">${user.email}</p>
       </div>
       <a href="./profile.html" data-root-href="src/pages/profile.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-user-line"></i> Tài khoản</a>
       <a href="./order.html" data-root-href="src/pages/order.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-file-list-line"></i> Đơn hàng</a>
