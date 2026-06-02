@@ -70,6 +70,7 @@ export class LoginService {
     localStorage.setItem("accessToken", accessToken);
 
     localStorage.setItem("refreshToken", refreshToken);
+    window.updateCartFavoriteVisibility();
     window.initUserDropdown();
     return ResponseSuccess("Login successful.", {
       accessToken,

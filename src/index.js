@@ -119,7 +119,23 @@ function toggleSubAccordion(element) {
 }
 
 // =========================
-// 2. KHỞI TẠO USER DROPDOWN (Sử dụng window để gọi lại từ file khác)
+// 2. CẬP NHẬT VISIBILITY CART & FAVORITE
+// =========================
+window.updateCartFavoriteVisibility = function () {
+  const cartFavoriteContainer = document.getElementById("cartFavoriteContainer");
+  const user = JSON.parse(localStorage.getItem("user")) || null;
+
+  if (!cartFavoriteContainer) return;
+
+  if (user) {
+    cartFavoriteContainer.classList.remove("hidden");
+  } else {
+    cartFavoriteContainer.classList.add("hidden");
+  }
+};
+
+// =========================
+// 3. KHỞI TẠO USER DROPDOWN (Sử dụng window để gọi lại từ file khác)
 // =========================
 window.initUserDropdown = function () {
   const userDropdown = document.getElementById("userDropdown");
@@ -144,6 +160,7 @@ window.initUserDropdown = function () {
     document.getElementById("logoutBtn")?.addEventListener("click", (e) => {
       e.preventDefault();
       localStorage.removeItem("user");
+      window.updateCartFavoriteVisibility();
       window.location.href = "./login.html";
     });
   } else {
@@ -159,7 +176,7 @@ window.initUserDropdown = function () {
 };
 
 // =========================
-// 3. XỬ LÝ SỰ KIỆN CLICK TOÀN CỤC (Event Delegation)
+// 4. XỬ LÝ SỰ KIỆN CLICK TOÀN CỤC (Event Delegation)
 // =========================
 function isMegaMenuTrigger(target) {
   return !!(
@@ -218,7 +235,7 @@ window.addEventListener("resize", () => {
 });
 
 // =========================
-// 4. TOGGLE HIỆN / ẨN MẬT KHẨU
+// 5. TOGGLE HIỆN / ẨN MẬT KHẨU
 // =========================
 function initPasswordToggles() {
   document.querySelectorAll("[data-password-toggle]").forEach((btn) => {
@@ -240,9 +257,10 @@ function initPasswordToggles() {
 window.initPasswordToggles = initPasswordToggles;
 
 // =========================
-// 5. CHẠY KHỞI TẠO
+// 6. CHẠY KHỞI TẠO
 // =========================
 document.addEventListener("DOMContentLoaded", () => {
+  window.updateCartFavoriteVisibility();
   initPasswordToggles();
   window.initUserDropdown();
 });
