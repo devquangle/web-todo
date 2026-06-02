@@ -161,45 +161,48 @@ window.initUserDropdown = function () {
 // =========================
 // 3. XỬ LÝ SỰ KIỆN CLICK TOÀN CỤC (Event Delegation)
 // =========================
+function isMegaMenuTrigger(target) {
+  return !!(
+    target.closest("#megaMenuBtn") ||
+    target.closest("#mobileMegaMenuBtn")
+  );
+}
+
+function closeMegaMenuOnOutsideClick(e) {
+  const megaMenu = document.getElementById("megaMenu");
+  if (!megaMenu || megaMenu.classList.contains("hidden")) return;
+
+  if (megaMenu.contains(e.target) || isMegaMenuTrigger(e.target)) return;
+
+  setMegaMenuOpen(false);
+}
+
 document.addEventListener("click", (e) => {
   if (e.target.closest("#mobileMenu a[href]")) {
     closeMobileMenu();
     setMegaMenuOpen(false);
+    return;
   }
+
+  closeMegaMenuOnOutsideClick(e);
 
   const userMenuBtn = document.getElementById("userMenuBtn");
   const userDropdown = document.getElementById("userDropdown");
   const arrowIcon = document.getElementById("arrowIcon");
 
-  if (!userMenuBtn || !userDropdown) return;
-
-  // Nếu click vào nút userMenuBtn
-  if (userMenuBtn.contains(e.target)) {
-    e.stopPropagation();
-    
-    setMegaMenuOpen(false);
-
-    userDropdown.classList.toggle("hidden");
-    arrowIcon?.classList.toggle("rotate-180");
-  } 
-  // Nếu click ra ngoài userDropdown thì đóng nó lại
-  else if (!userDropdown.contains(e.target)) {
-    userDropdown.classList.add("hidden");
-    arrowIcon?.classList.remove("rotate-180");
+  if (userMenuBtn && userDropdown) {
+    if (userMenuBtn.contains(e.target)) {
+      setMegaMenuOpen(false);
+      userDropdown.classList.toggle("hidden");
+      arrowIcon?.classList.toggle("rotate-180");
+    } else if (!userDropdown.contains(e.target)) {
+      userDropdown.classList.add("hidden");
+      arrowIcon?.classList.remove("rotate-180");
+    }
   }
 
-  const megaMenu = document.getElementById("megaMenu");
-  const megaMenuBtn = document.getElementById("megaMenuBtn");
   const mobileMenu = document.getElementById("mobileMenu");
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-  const clickedMega =
-    megaMenu?.contains(e.target) ||
-    megaMenuBtn?.contains(e.target) ||
-    e.target.closest("#mobileMenu button");
-  if (megaMenu && !clickedMega && !megaMenu.classList.contains("hidden")) {
-    setMegaMenuOpen(false);
-  }
-
   const clickedMobileNav =
     mobileMenu?.contains(e.target) || mobileMenuBtn?.contains(e.target);
   if (mobileMenu && !clickedMobileNav && !mobileMenu.classList.contains("hidden")) {
