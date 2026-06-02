@@ -9,9 +9,13 @@ export default defineConfig({
     screenshot: "on",
     video: "on",
     trace: "on",
+     launchOptions: {
+      slowMo: 800,
+    },
   },
   reporter: [
     ["list"],
+      ["json", { outputFile: "report.json" }],
     ["html", { open: "never" }],
   ],
   webServer: {

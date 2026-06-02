@@ -26,8 +26,12 @@
     "test": "tests"
   },
   "scripts": {
+    "test": "vitest",
     "test:unit": "vitest run tests/unit",
-    "test:e2e": "playwright test --ui",
+    "test:unit:watch": "vitest watch tests/unit",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
     "test:watch": "vitest watch",
     "coverage": "vitest run --coverage",
@@ -38,5 +42,8 @@
     "@vitest/coverage-v8": "^4.1.7",
     "http-server": "^14.1.1",
     "vitest": "^4.1.7"
+  },
+  "dependencies": {
+    "playwright-markdown-reporter": "^0.0.0"
   }
 }
