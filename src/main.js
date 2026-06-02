@@ -44,6 +44,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (typeof window.initUserDropdown === 'function') {
     window.initUserDropdown();
   }
+  if (typeof window.updateCartFavoriteVisibility === 'function') {
+    window.updateCartFavoriteVisibility();
+  }
 
   await loadComponent("footer-placeholder", `${componentBase}footer-user.html`);
 });
