@@ -36,17 +36,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   const isPage = isInPagesFolder();
   const componentBase = isPage ? "../components/" : "src/components/";
 
-  // Load navbar và đợi nó hoàn tất
-  await loadComponent("navbar-placeholder", `${componentBase}nav-user.html`);
+  // Khởi tạo các Promise để load các component cùng lúc
+  const navbarPromise = loadComponent("navbar-placeholder", `${componentBase}nav-user.html`);
+  const footerPromise = loadComponent("footer-placeholder", `${componentBase}footer-user.html`);
+
+  // Chờ cho cả 2 hoàn tất
+  await Promise.all([navbarPromise, footerPromise]);
+
+  // Sau khi cả 2 đã load xong, mới thực hiện các logic bổ sung
+  // Lưu ý: Navbar phải xong trước để applyRootHrefOverrides và các hàm init
   applyRootHrefOverrides(document.getElementById("navbar-placeholder") || document);
 
-  // SAU KHI LOAD XONG NAVBAR, KÍCH HOẠT LOGIC MENU
   if (typeof window.initUserDropdown === 'function') {
     window.initUserDropdown();
   }
   if (typeof window.updateCartFavoriteVisibility === 'function') {
     window.updateCartFavoriteVisibility();
   }
-
-  await loadComponent("footer-placeholder", `${componentBase}footer-user.html`);
 });
