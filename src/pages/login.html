@@ -93,13 +93,24 @@
               Mật khẩu
             </label>
 
-            <input
-              type="password"
-              id="password"
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
                 autocomplete="current-password"
-              placeholder="Nhập mật khẩu của bạn"
-              class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
-            />
+                placeholder="Nhập mật khẩu của bạn"
+                class="w-full bg-slate-50 border border-slate-200 text-xs text-slate-800 rounded-xl pl-4 pr-11 py-3 focus:outline-none focus:bg-white focus:border-amber-400 transition"
+              />
+              <button
+                type="button"
+                data-password-toggle
+                aria-controls="password"
+                aria-label="Hiện mật khẩu"
+                class="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 transition"
+              >
+                <i class="ri-eye-line text-lg"></i>
+              </button>
+            </div>
 
             <span
               id="passwordError"

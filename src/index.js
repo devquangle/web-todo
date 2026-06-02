@@ -218,8 +218,31 @@ window.addEventListener("resize", () => {
 });
 
 // =========================
-// 4. CHẠY KHỞI TẠO
+// 4. TOGGLE HIỆN / ẨN MẬT KHẨU
+// =========================
+function initPasswordToggles() {
+  document.querySelectorAll("[data-password-toggle]").forEach((btn) => {
+    const inputId = btn.getAttribute("aria-controls");
+    const input = inputId ? document.getElementById(inputId) : null;
+    const icon = btn.querySelector("i");
+    if (!input || !icon) return;
+
+    btn.addEventListener("click", () => {
+      const isHidden = input.type === "password";
+      input.type = isHidden ? "text" : "password";
+      icon.classList.toggle("ri-eye-line", !isHidden);
+      icon.classList.toggle("ri-eye-off-line", isHidden);
+      btn.setAttribute("aria-label", isHidden ? "Ẩn mật khẩu" : "Hiện mật khẩu");
+    });
+  });
+}
+
+window.initPasswordToggles = initPasswordToggles;
+
+// =========================
+// 5. CHẠY KHỞI TẠO
 // =========================
 document.addEventListener("DOMContentLoaded", () => {
+  initPasswordToggles();
   window.initUserDropdown();
 });
