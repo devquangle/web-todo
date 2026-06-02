@@ -41,39 +41,36 @@ export class LoginService {
   }
 
   login(request) {
-    // 1. Hứng kết quả validate và kiểm tra dữ liệu đầu vào
     const validationResult = validateLoginRequest(request);
 
-    // Nếu validate thất bại, dừng hàm và trả ngay lỗi về cho Frontend
     if (!validationResult.success) {
       return ResponseError("Validation failed.", validationResult.data);
     }
 
-    // 2. Tìm kiếm user từ UserService
     const user = this.userService.findUserByEmailAndPassword(
       request.email,
       request.password,
     );
 
-    // 3. Kiểm tra xem user có tồn tại hay không
     if (!user) {
-      return ResponseError("Invalid email or password.", undefined);
-    } else {
-      const userToStore = {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-      };
-
-      // Lưu vào localStorage
-      localStorage.setItem("user", JSON.stringify(userToStore));
+      return ResponseError("Invalid email or password.");
     }
 
-    // 4. Đăng nhập thành công - Tạo fake token trả về
-    const accessToken = `fake-access-token-for-${user.email}`;
-    const refreshToken = `fake-refresh-token-for-${user.email}`;
+    const userToStore = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
 
+    const accessToken = crypto.randomUUID();
+    const refreshToken = crypto.randomUUID();
+
+    localStorage.setItem("user", JSON.stringify(userToStore));
+
+    localStorage.setItem("accessToken", accessToken);
+
+    localStorage.setItem("refreshToken", refreshToken);
+    window.initUserDropdown();
     return ResponseSuccess("Login successful.", {
       accessToken,
       refreshToken,
