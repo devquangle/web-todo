@@ -30,6 +30,8 @@ function applyRootHrefOverrides(scope = document) {
   });
 }
 
+window.applyRootHrefOverrides = applyRootHrefOverrides;
+
 document.addEventListener("DOMContentLoaded", async () => {
   const isPage = isInPagesFolder();
   const componentBase = isPage ? "../components/" : "src/components/";

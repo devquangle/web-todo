@@ -121,12 +121,12 @@ function toggleSubAccordion(element) {
 // =========================
 // 2. KHỞI TẠO USER DROPDOWN (Sử dụng window để gọi lại từ file khác)
 // =========================
-window.initUserDropdown = function() {
+window.initUserDropdown = function () {
   const userDropdown = document.getElementById("userDropdown");
   const userMenuBtn = document.getElementById("userMenuBtn");
   const arrowIcon = document.getElementById("arrowIcon");
 
-  if (!userDropdown || !userMenuBtn || !arrowIcon) return;
+  if (!userDropdown || !userMenuBtn) return;
 
   const user = JSON.parse(localStorage.getItem("user")) || null;
 
@@ -136,9 +136,9 @@ window.initUserDropdown = function() {
         <p class="text-xs text-slate-400">Xin chào 👋</p>
         <p class="text-sm font-semibold truncate">${user.name || user.email}</p>
       </div>
-      <a href="./profile.html"       data-root-href="src/pages/profile.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-user-line"></i> Tài khoản</a>
-      <a href="./order.html"       data-root-href="src/pages/order.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-file-list-line"></i> Đơn hàng</a>
-      <button id="logoutBtn" class="w-full  text-left px-4 py-3 text-red-500 hover:bg-red-50"><i class="ri-logout-box-r-line mr-2"></i> Đăng xuất</button>
+      <a href="./profile.html" data-root-href="src/pages/profile.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-user-line"></i> Tài khoản</a>
+      <a href="./order.html" data-root-href="src/pages/order.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-file-list-line"></i> Đơn hàng</a>
+      <button id="logoutBtn" type="button" class="w-full text-left px-4 py-3 text-red-500 hover:bg-red-50"><i class="ri-logout-box-r-line mr-2"></i> Đăng xuất</button>
     `;
 
     document.getElementById("logoutBtn")?.addEventListener("click", (e) => {
@@ -148,9 +148,13 @@ window.initUserDropdown = function() {
     });
   } else {
     userDropdown.innerHTML = `
-      <a href="./login.html"      data-root-href="src/pages/login.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-login-box-line"></i> Đăng nhập</a>
+      <a href="./login.html" data-root-href="src/pages/login.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-login-box-line"></i> Đăng nhập</a>
       <a href="./register.html" data-root-href="src/pages/register.html" class="flex text-black items-center gap-2 px-4 py-3 hover:bg-slate-50"><i class="ri-user-add-line"></i> Đăng ký</a>
     `;
+  }
+
+  if (typeof window.applyRootHrefOverrides === "function") {
+    window.applyRootHrefOverrides(userDropdown);
   }
 };
 

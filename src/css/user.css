@@ -13,6 +13,7 @@ body {
   max-width: 100%;
   box-sizing: border-box;
 }
+
 /* Tùy biến thanh cuộn chuẩn thiết kế cho cả 3 cột */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px; /* Độ mảnh của thanh cuộn */
