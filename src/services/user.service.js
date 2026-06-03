@@ -2,7 +2,6 @@
  * Lớp dịch vụ quản lý danh sách và dữ liệu người dùng
  */
 export class UserService {
-  // Khởi tạo mảng dữ liệu cứng (Mock Data) đóng vai trò như một Database thu nhỏ
   users = [
     {
       id: 1,
@@ -27,37 +26,111 @@ export class UserService {
     },
   ];
 
-  /**
-   * Thêm một người dùng mới vào hệ thống
-   */
+  async fetchUsers(apiUrl) {
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+
+      // Chỉ validate 1 lần duy nhất tại đây khi vừa nhận dữ liệu từ API
+      return this.validateArray(data);
+    } catch (error) {
+      console.error("Lỗi khi lấy dữ liệu người dùng:", error);
+      return null; // Trả về null để phân biệt giữa "Lỗi API/Validate" và "Mảng rỗng hợp lệ"
+    }
+  }
+
+  validateArray(data) {
+    // 1. Kiểm tra nếu data không phải là một mảng
+    if (!Array.isArray(data)) {
+      console.warn("Dữ liệu không phải là một mảng:", data);
+      return null;
+    }
+
+    // 2. Nếu là mảng rỗng thì vẫn là hợp lệ (Ví dụ: hệ thống chưa có user nào)
+    if (data.length === 0) {
+      return [];
+    }
+
+    // 3. Kiểm tra các thuộc tính bắt buộc của user (Đã đồng bộ với hàm render HTML)
+    const isValidArray = data.every((user) => {
+      return (
+        user &&
+        typeof user === "object" &&
+        "id" in user &&
+        typeof user.id === "number" &&
+        "name" in user &&
+        typeof user.name === "string" &&
+        "username" in user && // Đã đổi từ phone thành username cho đúng với lúc render
+        typeof user.username === "string" &&
+        "email" in user &&
+        typeof user.email === "string"
+      );
+    });
+
+    if (!isValidArray) {
+      console.warn(
+        "Dữ liệu chứa phần tử không phải là người dùng hợp lệ.",
+        data,
+      );
+      return null; // Trả về null vì dữ liệu bị sai cấu trúc nghiêm trọng
+    }
+
+    return data;
+  }
+
+  // Lấy dữ liệu người dùng từ API và cập nhật vào giao diện
+  async loadData(apiUrl,tbody,resultDiv,fetchButton) {
+    // Xóa bớt dòng gọi validate thừa
+    const validUsers = await this.fetchUsers(apiUrl);
+
+    // Xóa dữ liệu cũ trong bảng trước khi render mới (nếu cần)
+    tbody.innerHTML = "";
+
+    // Kiểm tra nếu validUsers là null (nghĩa là bị lỗi API hoặc lỗi validate cấu trúc)
+    if (validUsers === null) {
+      resultDiv.className = "alert alert-danger";
+      resultDiv.textContent =
+        "Không thể tải dữ liệu hoặc dữ liệu không hợp lệ. Vui lòng thử lại.";
+      return;
+    }
+
+    fetchButton.textContent = "Đã tải xong";
+
+    if (validUsers.length === 0) {
+      resultDiv.textContent = "Không có người dùng nào trong danh sách.";
+    } else {
+      resultDiv.textContent = "Dữ liệu đã được tải thành công!";
+
+      validUsers.forEach((user) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${user.name}</td>
+          <td>${user.username}</td>
+          <td>${user.email}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+  }
   addUser(user) {
     this.users.push(user);
   }
 
-  /**
-   * Tìm kiếm người dùng dựa trên ID
-   */
   getUserById(id) {
     return this.users.find((user) => user.id === id) || null;
   }
 
-  /**
-   * Tìm kiếm người dùng dựa trên địa chỉ Email
-   */
   getUserByEmail(email) {
     return this.users.find((user) => user.email === email) || null;
   }
 
-  /**
-   * Lấy ra toàn bộ danh sách người dùng hiện tại
-   */
   getAllUsers() {
     return this.users;
   }
 
-  /**
-   * Cập nhật trạng thái hoạt động của người dùng (active hoặc inactive)
-   */
   updateUserStatus(id, status) {
     const user = this.getUserById(id);
     if (user) {
@@ -65,24 +138,17 @@ export class UserService {
     }
   }
 
-  /**
-   * Xóa một người dùng khỏi danh sách bằng ID
-   */
   deleteUser(id) {
     this.users = this.users.filter((user) => user.id !== id);
   }
 
-  /**
-   * Tìm kiếm tài khoản trùng khớp cả email, password và bắt buộc phải đang hoạt động (active)
-   * Hàm này phục vụ trực tiếp cho logic đăng nhập của LoginService
-   */
   findUserByEmailAndPassword(email, password) {
     return (
       this.users.find(
         (user) =>
           user.email === email &&
           user.password === password &&
-          user.status === "active"
+          user.status === "active",
       ) || null
     );
   }
