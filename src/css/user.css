@@ -14,6 +14,12 @@ body {
   box-sizing: border-box;
 }
 
+@media (max-width: 767px) {
+  #navbar-placeholder .mega-menu-panel {
+    width: auto;
+  }
+}
+
 /* Tùy biến thanh cuộn chuẩn thiết kế cho cả 3 cột */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px; /* Độ mảnh của thanh cuộn */
