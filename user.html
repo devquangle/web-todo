@@ -54,8 +54,10 @@
       const userService = new UserService();
       const fetchDataForm = document.getElementById("fetch-data-form");
       const fetchButton = document.getElementById("fetch-data-btn");
-      const resultDiv = document.getElementById("result");
-      const tbody = document.querySelector("#user-table tbody");
+      const resultDiv = document.getElementById("result"); // Dùng để hiện chữ "Đang tải..."
+
+      // Lấy đúng phần tử tbody của bảng để đổ dữ liệu vào
+      const userTableBody = document.querySelector("#user-table tbody");
 
       fetchDataForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -68,19 +70,30 @@
           return;
         }
 
-        // Thiết lập trạng thái chờ (Loading) trước khi đẩy qua cho Class xử lý
+        // Trạng thái chờ
         resultDiv.className = "alert alert-info";
         resultDiv.textContent = "Đang tải dữ liệu...";
+        userTableBody.innerHTML = ""; // Xóa dữ liệu cũ trong bảng khi bắt đầu tải mới
         fetchButton.disabled = true;
         fetchButton.textContent = "Đang tải...";
 
         try {
-          // TRUYỀN các phần tử giao diện vào hàm loadData để thực hiện render bên trong Class
-          await userService.loadData(apiUrl, tbody, resultDiv, fetchButton);
+          // 1. Lấy chuỗi hàng HTML (các thẻ <tr><td>) từ Service
+          const tableRowsHtml = await userService.loadData(apiUrl);
+
+          // 2. Đổ thẳng chuỗi hàng này vào nội dung bên trong tbody
+          userTableBody.innerHTML = tableRowsHtml;
+
+          // 3. Xóa hoặc ẩn thông báo "Đang tải..." đi sau khi thành công
+          resultDiv.className = "alert alert-success";
+          resultDiv.textContent = "Load thành công.";
         } catch (criticalError) {
           console.error("Lỗi hệ thống:", criticalError);
           resultDiv.className = "alert alert-danger";
           resultDiv.textContent = "Đã xảy ra sự cố không mong muốn.";
+          userTableBody.innerHTML = `<tr><td colspan="3" class="text-danger text-center">Sự cố hệ thống.</td></tr>`;
+        } finally {
+          // Mở khóa lại nút bấm
           fetchButton.disabled = false;
           fetchButton.textContent = "Lấy dữ liệu";
         }

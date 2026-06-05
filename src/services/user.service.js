@@ -1,6 +1,3 @@
-/**
- * Lớp dịch vụ quản lý danh sách và dữ liệu người dùng
- */
 export class UserService {
   users = [
     {
@@ -81,39 +78,29 @@ export class UserService {
     return data;
   }
 
-  // Lấy dữ liệu người dùng từ API và cập nhật vào giao diện
-  async loadData(apiUrl,tbody,resultDiv,fetchButton) {
-    // Xóa bớt dòng gọi validate thừa
-    const validUsers = await this.fetchUsers(apiUrl);
+  async loadData(apiUrl) {
+    const data = await this.fetchUsers(apiUrl);
 
-    // Xóa dữ liệu cũ trong bảng trước khi render mới (nếu cần)
-    tbody.innerHTML = "";
-
-    // Kiểm tra nếu validUsers là null (nghĩa là bị lỗi API hoặc lỗi validate cấu trúc)
-    if (validUsers === null) {
-      resultDiv.className = "alert alert-danger";
-      resultDiv.textContent =
-        "Không thể tải dữ liệu hoặc dữ liệu không hợp lệ. Vui lòng thử lại.";
-      return;
+    if (data === null) {
+      return `<tr><td colspan="3" class="text-danger text-center font-weight-bold">Không thể tải dữ liệu hoặc dữ liệu không hợp lệ.</td></tr>`;
     }
 
-    fetchButton.textContent = "Đã tải xong";
-
-    if (validUsers.length === 0) {
-      resultDiv.textContent = "Không có người dùng nào trong danh sách.";
-    } else {
-      resultDiv.textContent = "Dữ liệu đã được tải thành công!";
-
-      validUsers.forEach((user) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${user.name}</td>
-          <td>${user.username}</td>
-          <td>${user.email}</td>
-        `;
-        tbody.appendChild(row);
-      });
+    if (data.length === 0) {
+      return `<tr><td colspan="3" class="text-muted text-center">Không có người dùng nào trong danh sách.</td></tr>`;
     }
+
+    let html = "";
+    data.forEach((user) => {
+      html += `
+      <tr>
+        <td>${user.name}</td>
+        <td>${user.username}</td>
+        <td>${user.email}</td>
+      </tr>
+    `;
+    });
+
+    return html;
   }
   addUser(user) {
     this.users.push(user);
