@@ -1,0 +1,25 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "Hoc html",
+      "completed": false
+    },
+    {
+      "id": "2",
+      "title": "Viet test unit",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "title": "Chay E2E",
+      "completed": false
+    },
+    {
+      "id": "4",
+      "title": "Kiểm tra chức năng xem các việc đã làm",
+      "completed": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
