@@ -85,132 +85,56 @@
         </section>
       </div>
     </div>
-    <script>
-      async function loadTodos() {
+    <script type="module">
+      import TodoService from "./src/services/todo.service.js";
+      /** @type {TodoService} */
+      const todoService = new TodoService();
+      async function loadTodos() 
+      {
+        const todoListContainer = document.getElementById("todo-list");
+        todoListContainer.innerHTML = "";
         try {
-          const resp = await fetch("http://localhost:3000/todos");
-          const todoListContainer = document.getElementById("todo-list");
+          const data = await todoService.fetch();
 
-          todoListContainer.innerHTML = "";
-
-          if (!resp.ok) {
-            todoListContainer.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Có lỗi xảy ra từ máy chủ! ❌</td></tr>`;
-            return;
-          }
-
-          // 2. Đổi tên biến hứng dữ liệu cho đồng bộ
-          const data = await resp.json();
-
-          if (data.length === 0) {
+          if (!data || data.length === 0) {
             todoListContainer.innerHTML = `<tr><td colspan="4" class="text-center text-muted">Chưa có công việc nào cần làm! 🎉</td></tr>`;
             return;
           }
-
-          // 3. Sử dụng đúng biến `data` đã khai báo ở trên để lặp
           data.forEach((todo, index) => {
             const isChecked = todo.completed ? "checked" : "";
             const textClass = todo.completed
               ? "text-muted text-decoration-line-through"
               : "";
-
             const row = `
-              <tr>
-                <td>${index + 1}</td>
-                <td class="fw-semibold task-text ${textClass}">${todo?.title}</td>
-                <td class="text-center">
-                  <div class="form-check d-flex justify-content-center">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      ${isChecked}
-                      onchange="toggleStatus('${todo?.id}', ${todo?.completed})"
-                    />
-                  </div>
-                </td>
-                <td class="text-center">
-                  <button class="btn btn-sm btn-outline-warning me-1 fw-medium" onclick="editTodo('${todo?.id}', '${todo.title}')">
-                    ✏️ Sửa
-                  </button>
-                  <button id="delete-btn${todo?.id}" class="btn btn-sm btn-outline-danger fw-medium" onclick="deleteTodo('${todo?.id}')">
-                    🗑️ Xóa
-                  </button>
-                </td>
-              </tr>
-            `;
+            <tr>
+              <td>${index + 1}</td>
+              <td class="fw-semibold task-text ${textClass}">${todo?.title}</td>
+              <td class="text-center">
+                <div class="form-check d-flex justify-content-center">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    ${isChecked}
+                    onchange="toggleStatus('${todo?.id}', ${todo?.completed})"
+                  />
+                </div>
+              </td>
+              <td class="text-center">
+                <button class="btn btn-sm btn-outline-warning me-1 fw-medium" onclick="editTodo('${todo?.id}', '${todo.title}')">
+                  ✏️ Sửa
+                </button>
+                <button id="delete-btn${todo?.id}" class="btn btn-sm btn-outline-danger fw-medium" onclick="deleteTodo('${todo?.id}')">
+                  🗑️ Xóa
+                </button>
+              </td>
+            </tr>
+          `;
             todoListContainer.insertAdjacentHTML("beforeend", row);
           });
-          data.forEach(async (job) => {
-            const btnDelte = document.getElementById(`delete-btn${job.id}`);
-
-            if (btnDelte) {
-              btnDelte.addEventListener("click", async () => {
-                const confirmed = confirm(
-                  "Bạn có chắn chắn muốn xoá không? 🤨",
-                );
-                if (!confirmed) return;
-
-                try {
-                  const resp = await fetch(
-                    `http://localhost:3000/todos/${job.id}`,
-                    {
-                      method: "DELETE",
-                    },
-                  );
-
-                  if (resp.ok) {
-                    await loadTodos();
-                  } else {
-                    alert("Xóa thất bại từ máy chủ! ❌");
-                  }
-                } catch (err) {
-                  console.error("Lỗi khi xóa:", err);
-                }
-              });
-            }
-          }
-        );
         } catch (error) {
-          console.error("Lỗi mạng/kết nối:", error);
-          document.getElementById("todo-list").innerHTML =
-            `<tr><td colspan="4" class="text-center text-danger">⚠️ Lỗi kết nối đến Server Local (JSON Server)!</td></tr>`;
+          console.error("Lỗi hiển thị danh sách:", error);
+          todoListContainer.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Có lỗi xảy ra từ máy chủ! ❌</td></tr>`;
         }
-      }
-
-      async function add(event) {
-        event.preventDefault();
-
-        const taskInput = document.getElementById("taskName");
-        const title = taskInput.value.trim();
-        if (!title) return;
-
-        const newTodo = {
-          title: title,
-          completed: false,
-        };
-
-        try {
-          const resp = await fetch("http://localhost:3000/todos", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newTodo),
-          });
-
-          if (resp.ok) {
-            taskInput.value = "";
-
-            await loadTodos();
-          } else {
-            alert("Không thể thêm công việc mới. Có lỗi từ server! ❌");
-          }
-        } catch (error) {
-          console.error("Lỗi khi thêm công việc:", error);
-          alert("Không thể kết nối đến server! ⚠️");
-        }
-      }
-      async function deleteTodo(id) {
-        const resp = await fetch("");
       }
 
       document.addEventListener("DOMContentLoaded", loadTodos);
