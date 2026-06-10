@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <title>Danh sách việc cần làm</title>
     <style>
       body {
@@ -21,7 +21,6 @@
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       }
-      /* Custom lại một chút cho checkbox đẹp hơn */
       .form-check-input:checked + .task-text {
         text-decoration: line-through;
         color: #6c757d;
@@ -36,15 +35,16 @@
         </h2>
 
         <section class="mb-5">
-          <form onsubmit="add(event)">
+          <form id="todo-form">
             <div class="row g-3 align-items-end">
-              <div class="col-md-9">
+              <div class="col-md-8">
+                <input type="hidden" id="taskId" value="" name="taskId" />
                 <label for="taskName" class="form-label fw-semibold"
                   >Tên công việc:</label
                 >
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control form-control-lg fs-6"
                   id="taskName"
                   placeholder="Nhập tên công việc..."
                   name="taskName"
@@ -52,10 +52,23 @@
                 />
               </div>
 
-              <div class="col-md-3">
-                <button type="submit" class="btn btn-primary w-100 fw-bold">
-                  lưu
-                </button>
+              <div class="col-md-4">
+                <div class="d-flex gap-2">
+                  <button
+                    type="submit"
+                    id="btn-submit-todo"
+                    class="btn btn-primary btn-lg fs-6 w-100 fw-bold text-nowrap"
+                  >
+                    💾 Lưu
+                  </button>
+                  <button
+                    type="reset"
+                    id="btn-reset-todo"
+                    class="btn btn-outline-secondary btn-lg fs-6 w-100 fw-bold text-nowrap"
+                  >
+                    🔄 Reset
+                  </button>
+                </div>
               </div>
             </div>
           </form>
@@ -85,12 +98,70 @@
         </section>
       </div>
     </div>
+
+    <div
+      class="modal fade"
+      id="ModalDeleteTodo"
+      data-bs-backdrop="static"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title fw-bold">⚠️ Xác nhận xóa</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body fs-5">
+            Bạn có chắc chắn muốn xóa công việc:
+            <div id="delete-task-title" class="fw-bold my-2 text-danger"></div>
+            <small class="text-muted fs-6"
+              >Hành động này không thể hoàn tác.</small
+            >
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary fw-medium"
+              data-bs-dismiss="modal"
+            >
+              Hủy bỏ
+            </button>
+            <button
+              type="button"
+              id="confirm-delete-btn"
+              class="btn btn-danger fw-bold"
+            >
+              🗑️ Đồng ý Xóa
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script type="module">
       import TodoService from "./src/services/todo.service.js";
+
       /** @type {TodoService} */
       const todoService = new TodoService();
-      async function loadTodos() 
-      {
+      const todoForm = document.getElementById("todo-form");
+      const taskId = document.getElementById("taskId");
+      const taskName = document.getElementById("taskName");
+      const btnDeleteTodo = document.getElementById("confirm-delete-btn");
+      const btnSaveTodo = document.getElementById("btn-submit-todo");
+
+      let todoIdToDelete = null;
+      const bootstrapModal = new bootstrap.Modal(
+        document.getElementById("ModalDeleteTodo"),
+      );
+
+      // 1. Hàm hiển thị danh sách công việc
+      async function loadTodos() {
         const todoListContainer = document.getElementById("todo-list");
         todoListContainer.innerHTML = "";
         try {
@@ -100,11 +171,14 @@
             todoListContainer.innerHTML = `<tr><td colspan="4" class="text-center text-muted">Chưa có công việc nào cần làm! 🎉</td></tr>`;
             return;
           }
+
           data.forEach((todo, index) => {
             const isChecked = todo.completed ? "checked" : "";
             const textClass = todo.completed
               ? "text-muted text-decoration-line-through"
               : "";
+            const encodedTodo = btoa(encodeURIComponent(JSON.stringify(todo)));
+
             const row = `
             <tr>
               <td>${index + 1}</td>
@@ -120,10 +194,10 @@
                 </div>
               </td>
               <td class="text-center">
-                <button class="btn btn-sm btn-outline-warning me-1 fw-medium" onclick="editTodo('${todo?.id}', '${todo.title}')">
+                <button class="btn btn-sm btn-outline-warning me-1 fw-medium" onclick="prepareEditTodo('${encodedTodo}')">
                   ✏️ Sửa
                 </button>
-                <button id="delete-btn${todo?.id}" class="btn btn-sm btn-outline-danger fw-medium" onclick="deleteTodo('${todo?.id}')">
+                <button class="btn btn-sm btn-outline-danger fw-medium" onclick="prepareDeleteTodo('${encodedTodo}')">
                   🗑️ Xóa
                 </button>
               </td>
@@ -137,6 +211,111 @@
         }
       }
 
+      // 2. Xử lý sự kiện gửi Form (Thêm mới hoặc Cập nhật)
+      todoForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const id = taskId.value;
+        const title = taskName.value.trim();
+
+        try {
+          if (id) {
+            const oldTodo = await todoService.edit(id);
+            const updatedTodo = { ...oldTodo, title: title };
+            await todoService.update(id, updatedTodo);
+          } else {
+            const newTodo = { title: title, completed: false };
+            await todoService.add(newTodo);
+          }
+
+          resetFormState();
+          await loadTodos();
+        } catch (error) {
+          console.error("Lỗi xử lý Form:", error);
+          alert("Không thể thực hiện thao tác! ❌");
+        }
+      });
+
+      // 3. Hàm thay đổi trạng thái Checkbox toàn cục
+      window.toggleStatus = async (id, currentStatus) => {
+        try {
+          const oldTodo = await todoService.edit(id);
+          if (oldTodo) {
+            oldTodo.completed = !currentStatus;
+            await todoService.update(id, oldTodo);
+            await loadTodos();
+            alert("Cập nhật trạng thái thành công!");
+          }
+        } catch (error) {
+          console.error("Lỗi cập nhật trạng thái:", error);
+          alert("Không thể cập nhật trạng thái công việc! ❌");
+        }
+      };
+
+      // 4. Hàm chuẩn bị xóa (Mở Modal)
+      window.prepareDeleteTodo = (encodedTodo) => {
+        try {
+          const todo = JSON.parse(decodeURIComponent(atob(encodedTodo)));
+          todoIdToDelete = todo.id;
+
+          const taskTitleElement = document.getElementById("delete-task-title");
+          if (taskTitleElement) {
+            taskTitleElement.textContent = `"${todo.title}"`;
+          }
+
+          bootstrapModal.show();
+        } catch (error) {
+          console.error("Lỗi giải mã dữ liệu Todo:", error);
+          alert("Có lỗi xảy ra khi chuẩn bị xóa công việc! ❌");
+        }
+      };
+
+      // 5. Hàm chuẩn bị sửa (Đổ dữ liệu lên Form)
+      window.prepareEditTodo = (encodedTodo) => {
+        try {
+          const todo = JSON.parse(decodeURIComponent(atob(encodedTodo)));
+
+          taskId.value = todo.id;
+          taskName.value = todo.title;
+          btnSaveTodo.textContent = "🚀 Cập nhật"; // Thêm icon cập nhật động
+          btnSaveTodo.className =
+            "btn btn-warning btn-lg fs-6 w-100 fw-bold text-nowrap";
+          taskName.focus();
+        } catch (error) {
+          console.error("Lỗi giải mã dữ liệu Todo:", error);
+          alert("Có lỗi xảy ra khi cập nhật công việc! ❌");
+        }
+      };
+
+      // 6. Xử lý sự kiện click nút "Đồng ý Xóa" trong Modal
+      btnDeleteTodo.addEventListener("click", async () => {
+        if (!todoIdToDelete) return;
+
+        try {
+          await todoService.delete(todoIdToDelete);
+          bootstrapModal.hide();
+          todoIdToDelete = null;
+          await loadTodos();
+        } catch (error) {
+          alert("Xóa công việc thất bại! ❌");
+        }
+      });
+
+      // 7. Lắng nghe sự kiện bấm nút Reset của form
+      todoForm.addEventListener("reset", () => {
+        setTimeout(resetFormState, 10);
+      });
+
+      // Hàm phụ trợ dùng chung để đưa form về trạng thái thêm mới mặc định
+      function resetFormState() {
+        taskId.value = "";
+        taskName.value = "";
+        btnSaveTodo.textContent = "💾 Lưu"; // Trả về text + icon gốc
+        btnSaveTodo.className =
+          "btn btn-primary btn-lg fs-6 w-100 fw-bold text-nowrap";
+      }
+
+      // Khởi chạy lần đầu tiên
       document.addEventListener("DOMContentLoaded", loadTodos);
     </script>
   </body>

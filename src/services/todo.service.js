@@ -16,19 +16,15 @@ export default class TodoService {
   }
 
   // 2. THÊM CÔNG VIỆC MỚI
-  async add(request) {
-    const data = {
-      title: request.title,
-      completed: false,
-    };
+  async add(newTodo) {
     try {
       const resp = await fetch(this.#URL_API_TODO, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(newTodo),
       });
       if (!resp.ok) throw new Error("Lỗi server khi thêm công việc!");
-      return await resp.json(); // Trả về item vừa tạo thành công
+      return await resp.json();
     } catch (error) {
       console.error("Lỗi add:", error);
       throw error;
