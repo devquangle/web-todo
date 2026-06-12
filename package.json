@@ -27,7 +27,7 @@
   },
   "scripts": {
     "test": "vitest",
-    "test:unit": "vitest run tests/unit/user.unit.test.js",
+    "test:unit": "vitest run tests/unit/todo.unit.test.js",
     "test:business": "vitest run tests/business/loadUser.business.test.js",
     "test:unit:watch": "vitest watch tests/unit",
     "test:e2e": "playwright test",

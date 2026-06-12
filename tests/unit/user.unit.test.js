@@ -12,7 +12,7 @@ describe("User", (a) => {
     const data = await userService.fetchUsers(USER_API_URL);
     expect(data.length > 0);
   });
-  it("TEST-API-USER-001: Check data", async () => {
+  it("TEST-API-USER-002: Check data", async () => {
     const data = await userService.fetchUsers(USER_API_URL);
     const result = userService.validateArray(data);
     expect(result).not.toBeNull();

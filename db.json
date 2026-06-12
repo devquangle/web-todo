@@ -12,9 +12,15 @@
     },
     {
       "id": "4",
-      "title": "Kiểm tra chức năng xem các việc đã làm",
+      "title": "Kiểm tra chức năng xem các việc đã làms",
       "completed": false
+    },
+    {
+      "title": "Java co ban",
+      "completed": false,
+      "id": "2YmXncEalfk"
     }
   ],
+  "$db": "./node_modules/json-server/db.json",
   "$schema": "./node_modules/json-server/schema.json"
 }

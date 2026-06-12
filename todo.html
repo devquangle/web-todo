@@ -34,7 +34,7 @@
           📝 DANH SÁCH VIỆC CẦN LÀM
         </h2>
 
-        <section class="mb-5">
+        <section>
           <form id="todo-form">
             <div class="row g-3 align-items-end">
               <div class="col-md-8">
@@ -48,7 +48,6 @@
                   id="taskName"
                   placeholder="Nhập tên công việc..."
                   name="taskName"
-                  required
                 />
               </div>
 
@@ -70,11 +69,13 @@
                   </button>
                 </div>
               </div>
+              <span id="errorTaskName" class="col-12 m-0 text-danger py-1">
+              </span>
             </div>
           </form>
         </section>
 
-        <hr class="text-muted my-4" />
+        <hr class="text-muted mb-4" />
 
         <section>
           <h5 class="mb-3 text-secondary fw-semibold">Công việc hiện tại</h5>
@@ -152,6 +153,7 @@
       const todoForm = document.getElementById("todo-form");
       const taskId = document.getElementById("taskId");
       const taskName = document.getElementById("taskName");
+      const errorTaskName = document.getElementById("errorTaskName");
       const btnDeleteTodo = document.getElementById("confirm-delete-btn");
       const btnSaveTodo = document.getElementById("btn-submit-todo");
 
@@ -165,7 +167,7 @@
         const todoListContainer = document.getElementById("todo-list");
         todoListContainer.innerHTML = "";
         try {
-          const data = await todoService.fetch();
+          const data = await todoService.fetchData();
 
           if (!data || data.length === 0) {
             todoListContainer.innerHTML = `<tr><td colspan="4" class="text-center text-muted">Chưa có công việc nào cần làm! 🎉</td></tr>`;
@@ -184,14 +186,20 @@
               <td>${index + 1}</td>
               <td class="fw-semibold task-text ${textClass}">${todo?.title}</td>
               <td class="text-center">
-                <div class="form-check d-flex justify-content-center">
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    ${isChecked}
-                    onchange="toggleStatus('${todo?.id}', ${todo?.completed})"
-                  />
-                </div>
+                 <div class="d-flex justify-content-center align-items-center gap-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ${isChecked}
+                        onchange="toggleStatus('${todo?.id}', ${todo?.completed})"
+                      />
+
+                      <span id="status" class="badge ${
+                        todo?.completed ? "bg-success" : "bg-warning text-dark"
+                      }">
+                        ${todo?.completed ? "Completed" : "Pending"}
+                      </span>
+                  </div>
               </td>
               <td class="text-center">
                 <button class="btn btn-sm btn-outline-warning me-1 fw-medium" onclick="prepareEditTodo('${encodedTodo}')">
@@ -214,7 +222,7 @@
       // 2. Xử lý sự kiện gửi Form (Thêm mới hoặc Cập nhật)
       todoForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-
+        errorTaskName.textContent = "";
         const id = taskId.value;
         const title = taskName.value.trim();
 
@@ -232,7 +240,7 @@
           await loadTodos();
         } catch (error) {
           console.error("Lỗi xử lý Form:", error);
-          alert("Không thể thực hiện thao tác! ❌");
+          errorTaskName.textContent = error.message;
         }
       });
 
@@ -244,11 +252,9 @@
             oldTodo.completed = !currentStatus;
             await todoService.update(id, oldTodo);
             await loadTodos();
-            alert("Cập nhật trạng thái thành công!");
           }
         } catch (error) {
           console.error("Lỗi cập nhật trạng thái:", error);
-          alert("Không thể cập nhật trạng thái công việc! ❌");
         }
       };
 
@@ -266,7 +272,6 @@
           bootstrapModal.show();
         } catch (error) {
           console.error("Lỗi giải mã dữ liệu Todo:", error);
-          alert("Có lỗi xảy ra khi chuẩn bị xóa công việc! ❌");
         }
       };
 
@@ -306,11 +311,12 @@
         setTimeout(resetFormState, 10);
       });
 
-      // Hàm phụ trợ dùng chung để đưa form về trạng thái thêm mới mặc định
+
       function resetFormState() {
         taskId.value = "";
         taskName.value = "";
-        btnSaveTodo.textContent = "💾 Lưu"; // Trả về text + icon gốc
+        errorTaskName.textContent = "";
+        btnSaveTodo.textContent = "💾 Lưu"; 
         btnSaveTodo.className =
           "btn btn-primary btn-lg fs-6 w-100 fw-bold text-nowrap";
       }
