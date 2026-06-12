@@ -20,7 +20,5 @@
       "completed": false,
       "id": "2YmXncEalfk"
     }
-  ],
-  "$db": "./node_modules/json-server/db.json",
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
