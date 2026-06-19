@@ -188,7 +188,7 @@
               <td class="text-center">
                  <div class="d-flex justify-content-center align-items-center gap-2">
                       <input
-                        class="form-check-input"
+                        class="form-check-input "
                         type="checkbox"
                         ${isChecked}
                         onchange="toggleStatus('${todo?.id}', ${todo?.completed})"
@@ -202,10 +202,10 @@
                   </div>
               </td>
               <td class="text-center">
-                <button class="btn btn-sm btn-outline-warning me-1 fw-medium" onclick="prepareEditTodo('${encodedTodo}')">
+                <button id="btn-edit-${todo?.id}"" class="btn btn-sm btn-outline-warning me-1 fw-medium" onclick="prepareEditTodo('${encodedTodo}')">
                   ✏️ Sửa
                 </button>
-                <button class="btn btn-sm btn-outline-danger fw-medium" onclick="prepareDeleteTodo('${encodedTodo}')">
+                <button id="btn-delete-${todo?.id}"class="btn btn-sm btn-outline-danger fw-medium" onclick="prepareDeleteTodo('${encodedTodo}')">
                   🗑️ Xóa
                 </button>
               </td>

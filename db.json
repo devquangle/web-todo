@@ -1,24 +1,9 @@
 {
   "todos": [
     {
-      "id": "1",
-      "title": "Hoc html ss",
-      "completed": false
-    },
-    {
-      "id": "3",
-      "title": "Chay E2E",
-      "completed": false
-    },
-    {
-      "id": "4",
-      "title": "Kiểm tra chức năng xem các việc đã làms",
-      "completed": false
-    },
-    {
-      "title": "Java co ban",
+      "title": "Chay E2E 000 Updated",
       "completed": false,
-      "id": "2YmXncEalfk"
+      "id": "p_NhJjLE8Bk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

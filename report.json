@@ -70,20 +70,249 @@
   },
   "suites": [
     {
-      "title": "loadUser.e2e.spec.js",
-      "file": "loadUser.e2e.spec.js",
+      "title": "todo.e2e.spec.js",
+      "file": "todo.e2e.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Load user",
-          "file": "loadUser.e2e.spec.js",
-          "line": 5,
+          "title": "TODO",
+          "file": "todo.e2e.spec.js",
+          "line": 3,
           "column": 6,
           "specs": [
             {
-              "title": "T2E2-0001 ",
+              "title": "TC004: DELETE TODO",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4220,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T14:21:32.815Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC004-DELETE-TODO\\test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC004-DELETE-TODO\\video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC004-DELETE-TODO\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6df0b0445d14d291fe46-6a74274eda571db5b3b9",
+              "file": "todo.e2e.spec.js",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "TC005: EDIT TODO TITLE BỎ TRỐNG",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4765,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T14:21:37.946Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC005-EDIT-TODO-TITLE-BỎ-TRỐNG\\test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC005-EDIT-TODO-TITLE-BỎ-TRỐNG\\video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC005-EDIT-TODO-TITLE-BỎ-TRỐNG\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6df0b0445d14d291fe46-bca3113bdd7aeece1e6c",
+              "file": "todo.e2e.spec.js",
+              "line": 65,
+              "column": 3
+            },
+            {
+              "title": "TC006: EDIT TODO TITLE HỢP LỆ",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4596,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T14:21:42.945Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC006-EDIT-TODO-TITLE-HỢP-LỆ\\test-finished-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC006-EDIT-TODO-TITLE-HỢP-LỆ\\video.webm"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC006-EDIT-TODO-TITLE-HỢP-LỆ\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6df0b0445d14d291fe46-596078e67d6c66732b99",
+              "file": "todo.e2e.spec.js",
+              "line": 76,
+              "column": 3
+            },
+            {
+              "title": "TC007: EDIT TODO TITLE TỒN TẠI",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10380,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#errorTaskName')\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 2\u001b[39m\n\n\u001b[32m- Title already exists.\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m              \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#errorTaskName')\u001b[22m\n\u001b[2m    14 × locator resolved to <span id=\"errorTaskName\" class=\"col-12 m-0 text-danger py-1\">↵              </span>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m              \"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#errorTaskName')\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 2\u001b[39m\n\n\u001b[32m- Title already exists.\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m              \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#errorTaskName')\u001b[22m\n\u001b[2m    14 × locator resolved to <span id=\"errorTaskName\" class=\"col-12 m-0 text-danger py-1\">↵              </span>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m              \"\u001b[22m\n\n    at D:\\TESTER_CICD_CP26SCM02\\web-todo\\tests\\e2e\\todo.e2e.spec.js:111:50",
+                        "location": {
+                          "file": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\tests\\e2e\\todo.e2e.spec.js",
+                          "column": 50,
+                          "line": 111
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 109 |\u001b[39m\n \u001b[90m 110 |\u001b[39m   \u001b[90m//   // Verify lỗi\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 111 |\u001b[39m   \u001b[90m//   await expect(page.locator(\"#errorTaskName\")).toContainText(\u001b[39m\n \u001b[90m     |\u001b[39m                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 112 |\u001b[39m   \u001b[90m//     \"Title already exists.\",\u001b[39m\n \u001b[90m 113 |\u001b[39m   \u001b[90m//   );\u001b[39m\n \u001b[90m 114 |\u001b[39m   \u001b[90m// });\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\tests\\e2e\\todo.e2e.spec.js",
+                            "column": 50,
+                            "line": 111
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#errorTaskName')\nTimeout: 5000ms\n\u001b[32m- Expected substring  - 1\u001b[39m\n\u001b[31m+ Received string     + 2\u001b[39m\n\n\u001b[32m- Title already exists.\u001b[39m\n\u001b[31m+\u001b[39m\n\u001b[31m+ \u001b[43m              \u001b[49m\u001b[39m\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#errorTaskName')\u001b[22m\n\u001b[2m    14 × locator resolved to <span id=\"errorTaskName\" class=\"col-12 m-0 text-danger py-1\">↵              </span>\u001b[22m\n\u001b[2m       - unexpected value \"\u001b[22m\n\u001b[2m              \"\u001b[22m\n\n\n\u001b[0m \u001b[90m 109 |\u001b[39m\n \u001b[90m 110 |\u001b[39m   \u001b[90m//   // Verify lỗi\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 111 |\u001b[39m   \u001b[90m//   await expect(page.locator(\"#errorTaskName\")).toContainText(\u001b[39m\n \u001b[90m     |\u001b[39m                                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 112 |\u001b[39m   \u001b[90m//     \"Title already exists.\",\u001b[39m\n \u001b[90m 113 |\u001b[39m   \u001b[90m//   );\u001b[39m\n \u001b[90m 114 |\u001b[39m   \u001b[90m// });\u001b[39m\u001b[0m\n\u001b[2m    at D:\\TESTER_CICD_CP26SCM02\\web-todo\\tests\\e2e\\todo.e2e.spec.js:111:50\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-06-19T14:21:47.739Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC007-EDIT-TODO-TITLE-TỒN-TẠI\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC007-EDIT-TODO-TITLE-TỒN-TẠI\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC007-EDIT-TODO-TITLE-TỒN-TẠI\\error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC007-EDIT-TODO-TITLE-TỒN-TẠI\\trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\tests\\e2e\\todo.e2e.spec.js",
+                        "column": 50,
+                        "line": 111
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "6df0b0445d14d291fe46-73e6da3c73eb9316d8b7",
+              "file": "todo.e2e.spec.js",
+              "line": 93,
+              "column": 3
+            },
+            {
+              "title": "TC008: EDIT TODO TITLE == Title Click",
               "ok": true,
               "tags": [],
               "tests": [
@@ -98,28 +327,28 @@
                       "workerIndex": 1,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3951,
+                      "duration": 3237,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-05T14:05:39.675Z",
+                      "startTime": "2026-06-19T14:22:00.242Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\loadUser.e2e-Load-user-T2E2-0001-\\test-finished-1.png"
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC008-EDIT-TODO-TITLE-Title-Click\\test-finished-1.png"
                         },
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\loadUser.e2e-Load-user-T2E2-0001-\\video.webm"
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC008-EDIT-TODO-TITLE-Title-Click\\video.webm"
                         },
                         {
                           "name": "trace",
                           "contentType": "application/zip",
-                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\loadUser.e2e-Load-user-T2E2-0001-\\trace.zip"
+                          "path": "D:\\TESTER_CICD_CP26SCM02\\web-todo\\test-results\\todo.e2e-TODO-TC008-EDIT-TODO-TITLE-Title-Click\\trace.zip"
                         }
                       ]
                     }
@@ -127,9 +356,9 @@
                   "status": "expected"
                 }
               ],
-              "id": "657b1de4d4ff55593146-e2f90d595e74df81575c",
-              "file": "loadUser.e2e.spec.js",
-              "line": 10,
+              "id": "6df0b0445d14d291fe46-b87bb0dbf9b74d231028",
+              "file": "todo.e2e.spec.js",
+              "line": 115,
               "column": 3
             }
           ]
@@ -139,11 +368,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-06-05T14:05:37.267Z",
-    "duration": 7611.218999999997,
-    "expected": 1,
+    "startTime": "2026-06-19T14:21:31.121Z",
+    "duration": 33411.849,
+    "expected": 4,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   }
 }
